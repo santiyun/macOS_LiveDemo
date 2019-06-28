@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
+        <capability name="System colors introduced in macOS 10.14" minToolsVersion="10.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner" customClass="UserVideoContainer" customModule="TTTRtcEngineDemo" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="Hz6-mo-xeY" id="CDT-Bx-cGy"/>
+                <outlet property="userVideoControl" destination="JSH-eT-Yeq" id="Wcm-Ty-fuO"/>
+                <outlet property="view" destination="Hz6-mo-xeY" id="0bl-1N-x8E"/>
+            </connections>
+        </customObject>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="Hz6-mo-xeY" userLabel="Content View">
+            <rect key="frame" x="0.0" y="0.0" width="428" height="502"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <box boxType="custom" cornerRadius="3" title="Box" translatesAutoresizingMaskIntoConstraints="NO" id="iTI-N5-up4">
+                    <rect key="frame" x="0.0" y="0.0" width="428" height="502"/>
+                    <view key="contentView" id="OaP-oA-byR">
+                        <rect key="frame" x="1" y="1" width="426" height="500"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    </view>
+                    <color key="borderColor" name="separatorColor" catalog="System" colorSpace="catalog"/>
+                    <color key="fillColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
+                </box>
+                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JSH-eT-Yeq" customClass="UserVideoControl" customModule="TTTRtcEngineDemo" customModuleProvider="target">
+                    <rect key="frame" x="58" y="101" width="312" height="355"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                </customView>
+            </subviews>
+            <constraints>
+                <constraint firstItem="iTI-N5-up4" firstAttribute="leading" secondItem="Hz6-mo-xeY" secondAttribute="leading" id="DpT-aM-Udk"/>
+                <constraint firstAttribute="trailing" secondItem="iTI-N5-up4" secondAttribute="trailing" id="Vhu-YD-Rbd"/>
+                <constraint firstAttribute="bottom" secondItem="iTI-N5-up4" secondAttribute="bottom" id="f4Z-Gz-jxz"/>
+                <constraint firstItem="iTI-N5-up4" firstAttribute="top" secondItem="Hz6-mo-xeY" secondAttribute="top" id="sRC-IG-uRb"/>
+            </constraints>
+            <point key="canvasLocation" x="102" y="283"/>
+        </customView>
+    </objects>
+</document>

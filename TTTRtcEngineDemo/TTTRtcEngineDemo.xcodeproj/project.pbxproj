@@ -1,0 +1,494 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E80701F820F5EFC8004B4630 /* UserVideoContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80701F620F5EFC8004B4630 /* UserVideoContainer.swift */; };
+		E80701F920F5EFC8004B4630 /* UserVideoContainer.xib in Resources */ = {isa = PBXBuildFile; fileRef = E80701F720F5EFC8004B4630 /* UserVideoContainer.xib */; };
+		E80701FB20F5F018004B4630 /* UserVideoControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80701FA20F5F018004B4630 /* UserVideoControl.swift */; };
+		E80701FD20F5F07C004B4630 /* UserVideoControl.xib in Resources */ = {isa = PBXBuildFile; fileRef = E80701FC20F5F07C004B4630 /* UserVideoControl.xib */; };
+		E80F7F8D20F72A3600746162 /* TTTUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = E80F7F8C20F72A3600746162 /* TTTUser.swift */; };
+		E811E983229FBE1700207C32 /* forever.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = E811E982229FBE1600207C32 /* forever.mp3 */; };
+		E850B7B11F467A3B00AC4A1D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E850B7B01F467A3B00AC4A1D /* AppDelegate.swift */; };
+		E850B7B31F467A3B00AC4A1D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E850B7B21F467A3B00AC4A1D /* ViewController.swift */; };
+		E850B7B51F467A3B00AC4A1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E850B7B41F467A3B00AC4A1D /* Assets.xcassets */; };
+		E850B7B81F467A3B00AC4A1D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E850B7B61F467A3B00AC4A1D /* Main.storyboard */; };
+		E850B7C01F46D9BE00AC4A1D /* MainTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E850B7BF1F46D9BE00AC4A1D /* MainTabViewController.swift */; };
+		E850B7C21F46EFAA00AC4A1D /* StreamingUrlsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E850B7C11F46EFAA00AC4A1D /* StreamingUrlsViewController.swift */; };
+		E850B7C51F46F02000AC4A1D /* StreamingPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E850B7C31F46F02000AC4A1D /* StreamingPlayerViewController.swift */; };
+		E850B7C81F46F12E00AC4A1D /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E850B7C71F46F12E00AC4A1D /* MainWindowController.swift */; };
+		E892109B22A7DB3900B5B1C6 /* ProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = E892109922A7DB3800B5B1C6 /* ProgressHUD.swift */; };
+		E899005620F2246C0041EF73 /* TTTRtcEngineKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E899005520F2246C0041EF73 /* TTTRtcEngineKit.framework */; };
+		E899005820F245000041EF73 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E899005720F245000041EF73 /* LoginViewController.swift */; };
+		E899005B20F30C2C0041EF73 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E899005A20F30C2C0041EF73 /* libc++.tbd */; };
+		E899005D20F30C3F0041EF73 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E899005C20F30C3F0041EF73 /* libxml2.tbd */; };
+		E899005F20F30C720041EF73 /* libiconv.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E899005E20F30C720041EF73 /* libiconv.2.tbd */; };
+		E899006120F33DEA0041EF73 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E899006020F33DEA0041EF73 /* SystemConfiguration.framework */; };
+		E899006320F33E620041EF73 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E899006220F33E620041EF73 /* libresolv.tbd */; };
+		E8DEFDDB20F372490075E7FC /* libavdevice.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E8DEFDD420F372480075E7FC /* libavdevice.a */; };
+		E8DEFDDC20F372490075E7FC /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E8DEFDD520F372490075E7FC /* libavcodec.a */; };
+		E8DEFDDD20F372490075E7FC /* libavformat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E8DEFDD620F372490075E7FC /* libavformat.a */; };
+		E8DEFDDE20F372490075E7FC /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E8DEFDD720F372490075E7FC /* libavutil.a */; };
+		E8DEFDDF20F372490075E7FC /* libswresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E8DEFDD820F372490075E7FC /* libswresample.a */; };
+		E8DEFDE020F372490075E7FC /* libavfilter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E8DEFDD920F372490075E7FC /* libavfilter.a */; };
+		E8DEFDE120F372490075E7FC /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E8DEFDDA20F372490075E7FC /* libswscale.a */; };
+		E8DEFDE320F373230075E7FC /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E8DEFDE220F373230075E7FC /* libz.tbd */; };
+		E8DEFDE520F373740075E7FC /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E8DEFDE420F373740075E7FC /* libbz2.tbd */; };
+		E8DEFDE720F3743C0075E7FC /* VideoDecodeAcceleration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8DEFDE620F3743C0075E7FC /* VideoDecodeAcceleration.framework */; };
+		E8DEFDF620F46F2C0075E7FC /* LiveRoom.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E8DEFDF420F46F2C0075E7FC /* LiveRoom.storyboard */; };
+		E8DEFDF920F473F00075E7FC /* LiveRoomWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DEFDF720F473F00075E7FC /* LiveRoomWindowController.swift */; };
+		E8DEFDFC20F494E80075E7FC /* LiveRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8DEFDFB20F494E80075E7FC /* LiveRoomViewController.swift */; };
+		E8E54CB51F47EE6C004C91F1 /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8E54CB41F47EE6C004C91F1 /* Application.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		E80701F620F5EFC8004B4630 /* UserVideoContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserVideoContainer.swift; sourceTree = "<group>"; };
+		E80701F720F5EFC8004B4630 /* UserVideoContainer.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserVideoContainer.xib; sourceTree = "<group>"; };
+		E80701FA20F5F018004B4630 /* UserVideoControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserVideoControl.swift; sourceTree = "<group>"; };
+		E80701FC20F5F07C004B4630 /* UserVideoControl.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserVideoControl.xib; sourceTree = "<group>"; };
+		E80F7F8C20F72A3600746162 /* TTTUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TTTUser.swift; sourceTree = "<group>"; };
+		E811E982229FBE1600207C32 /* forever.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = forever.mp3; sourceTree = "<group>"; };
+		E850B7AD1F467A3B00AC4A1D /* TTTRtcEngineDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TTTRtcEngineDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E850B7B01F467A3B00AC4A1D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		E850B7B21F467A3B00AC4A1D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E850B7B41F467A3B00AC4A1D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E850B7B71F467A3B00AC4A1D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E850B7B91F467A3B00AC4A1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E850B7BF1F46D9BE00AC4A1D /* MainTabViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainTabViewController.swift; sourceTree = "<group>"; };
+		E850B7C11F46EFAA00AC4A1D /* StreamingUrlsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamingUrlsViewController.swift; sourceTree = "<group>"; };
+		E850B7C31F46F02000AC4A1D /* StreamingPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamingPlayerViewController.swift; sourceTree = "<group>"; };
+		E850B7C71F46F12E00AC4A1D /* MainWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
+		E8669604216C9B4F0065AD53 /* libevent.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libevent.a; path = ../../../Api/WS_macOS/library/corelib/AGORA/libevent.a; sourceTree = "<group>"; };
+		E892109922A7DB3800B5B1C6 /* ProgressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressHUD.swift; sourceTree = "<group>"; };
+		E899005520F2246C0041EF73 /* TTTRtcEngineKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TTTRtcEngineKit.framework; path = ../../../Api/macFrameworks/TTTRtcEngineKit/TTTRtcEngineKit.framework; sourceTree = "<group>"; };
+		E899005720F245000041EF73 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		E899005920F2483C0041EF73 /* TTTRtcEngine-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "TTTRtcEngine-Bridging-Header.h"; sourceTree = "<group>"; };
+		E899005A20F30C2C0041EF73 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		E899005C20F30C3F0041EF73 /* libxml2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libxml2.tbd; path = usr/lib/libxml2.tbd; sourceTree = SDKROOT; };
+		E899005E20F30C720041EF73 /* libiconv.2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libiconv.2.tbd; path = usr/lib/libiconv.2.tbd; sourceTree = SDKROOT; };
+		E899006020F33DEA0041EF73 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		E899006220F33E620041EF73 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = usr/lib/libresolv.tbd; sourceTree = SDKROOT; };
+		E8DEFDD420F372480075E7FC /* libavdevice.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavdevice.a; path = ../../../Api/macFrameworks/player/ffmpeg/libavdevice.a; sourceTree = "<group>"; };
+		E8DEFDD520F372490075E7FC /* libavcodec.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavcodec.a; path = ../../../Api/macFrameworks/player/ffmpeg/libavcodec.a; sourceTree = "<group>"; };
+		E8DEFDD620F372490075E7FC /* libavformat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavformat.a; path = ../../../Api/macFrameworks/player/ffmpeg/libavformat.a; sourceTree = "<group>"; };
+		E8DEFDD720F372490075E7FC /* libavutil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavutil.a; path = ../../../Api/macFrameworks/player/ffmpeg/libavutil.a; sourceTree = "<group>"; };
+		E8DEFDD820F372490075E7FC /* libswresample.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libswresample.a; path = ../../../Api/macFrameworks/player/ffmpeg/libswresample.a; sourceTree = "<group>"; };
+		E8DEFDD920F372490075E7FC /* libavfilter.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavfilter.a; path = ../../../Api/macFrameworks/player/ffmpeg/libavfilter.a; sourceTree = "<group>"; };
+		E8DEFDDA20F372490075E7FC /* libswscale.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libswscale.a; path = ../../../Api/macFrameworks/player/ffmpeg/libswscale.a; sourceTree = "<group>"; };
+		E8DEFDE220F373230075E7FC /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		E8DEFDE420F373740075E7FC /* libbz2.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.tbd; path = usr/lib/libbz2.tbd; sourceTree = SDKROOT; };
+		E8DEFDE620F3743C0075E7FC /* VideoDecodeAcceleration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = VideoDecodeAcceleration.framework; path = System/Library/Frameworks/VideoDecodeAcceleration.framework; sourceTree = SDKROOT; };
+		E8DEFDF520F46F2C0075E7FC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LiveRoom.storyboard; sourceTree = "<group>"; };
+		E8DEFDF720F473F00075E7FC /* LiveRoomWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveRoomWindowController.swift; sourceTree = "<group>"; };
+		E8DEFDFB20F494E80075E7FC /* LiveRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LiveRoomViewController.swift; sourceTree = "<group>"; };
+		E8E54CB41F47EE6C004C91F1 /* Application.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
+		E8EE6BF521392F8B007B1E30 /* libproc.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libproc.tbd; path = usr/lib/libproc.tbd; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E850B7AA1F467A3B00AC4A1D /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E8DEFDE720F3743C0075E7FC /* VideoDecodeAcceleration.framework in Frameworks */,
+				E8DEFDE520F373740075E7FC /* libbz2.tbd in Frameworks */,
+				E8DEFDE320F373230075E7FC /* libz.tbd in Frameworks */,
+				E8DEFDDB20F372490075E7FC /* libavdevice.a in Frameworks */,
+				E8DEFDDC20F372490075E7FC /* libavcodec.a in Frameworks */,
+				E8DEFDDD20F372490075E7FC /* libavformat.a in Frameworks */,
+				E8DEFDDE20F372490075E7FC /* libavutil.a in Frameworks */,
+				E8DEFDDF20F372490075E7FC /* libswresample.a in Frameworks */,
+				E8DEFDE020F372490075E7FC /* libavfilter.a in Frameworks */,
+				E8DEFDE120F372490075E7FC /* libswscale.a in Frameworks */,
+				E899006320F33E620041EF73 /* libresolv.tbd in Frameworks */,
+				E899006120F33DEA0041EF73 /* SystemConfiguration.framework in Frameworks */,
+				E899005F20F30C720041EF73 /* libiconv.2.tbd in Frameworks */,
+				E899005D20F30C3F0041EF73 /* libxml2.tbd in Frameworks */,
+				E899005B20F30C2C0041EF73 /* libc++.tbd in Frameworks */,
+				E899005620F2246C0041EF73 /* TTTRtcEngineKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E850B7A41F467A3B00AC4A1D = {
+			isa = PBXGroup;
+			children = (
+				E892109722A7DB3800B5B1C6 /* ProgressHUD */,
+				E850B7AF1F467A3B00AC4A1D /* TTTRtcEngineDemo */,
+				E850B7AE1F467A3B00AC4A1D /* Products */,
+				E899005420F2246C0041EF73 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		E850B7AE1F467A3B00AC4A1D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E850B7AD1F467A3B00AC4A1D /* TTTRtcEngineDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E850B7AF1F467A3B00AC4A1D /* TTTRtcEngineDemo */ = {
+			isa = PBXGroup;
+			children = (
+				E80F7F8C20F72A3600746162 /* TTTUser.swift */,
+				E850B7B01F467A3B00AC4A1D /* AppDelegate.swift */,
+				E8E54CB41F47EE6C004C91F1 /* Application.swift */,
+				E850B7B21F467A3B00AC4A1D /* ViewController.swift */,
+				E850B7C71F46F12E00AC4A1D /* MainWindowController.swift */,
+				E850B7BF1F46D9BE00AC4A1D /* MainTabViewController.swift */,
+				E899005720F245000041EF73 /* LoginViewController.swift */,
+				E8DEFDF720F473F00075E7FC /* LiveRoomWindowController.swift */,
+				E8DEFDFB20F494E80075E7FC /* LiveRoomViewController.swift */,
+				E80701F620F5EFC8004B4630 /* UserVideoContainer.swift */,
+				E80701F720F5EFC8004B4630 /* UserVideoContainer.xib */,
+				E80701FA20F5F018004B4630 /* UserVideoControl.swift */,
+				E80701FC20F5F07C004B4630 /* UserVideoControl.xib */,
+				E850B7C11F46EFAA00AC4A1D /* StreamingUrlsViewController.swift */,
+				E850B7C31F46F02000AC4A1D /* StreamingPlayerViewController.swift */,
+				E850B7B61F467A3B00AC4A1D /* Main.storyboard */,
+				E8DEFDF420F46F2C0075E7FC /* LiveRoom.storyboard */,
+				E850B7B41F467A3B00AC4A1D /* Assets.xcassets */,
+				E811E982229FBE1600207C32 /* forever.mp3 */,
+				E850B7B91F467A3B00AC4A1D /* Info.plist */,
+				E899005920F2483C0041EF73 /* TTTRtcEngine-Bridging-Header.h */,
+			);
+			path = TTTRtcEngineDemo;
+			sourceTree = "<group>";
+		};
+		E892109722A7DB3800B5B1C6 /* ProgressHUD */ = {
+			isa = PBXGroup;
+			children = (
+				E892109922A7DB3800B5B1C6 /* ProgressHUD.swift */,
+			);
+			path = ProgressHUD;
+			sourceTree = "<group>";
+		};
+		E899005420F2246C0041EF73 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E8669604216C9B4F0065AD53 /* libevent.a */,
+				E8EE6BF521392F8B007B1E30 /* libproc.tbd */,
+				E8DEFDE620F3743C0075E7FC /* VideoDecodeAcceleration.framework */,
+				E8DEFDE420F373740075E7FC /* libbz2.tbd */,
+				E8DEFDE220F373230075E7FC /* libz.tbd */,
+				E8DEFDD520F372490075E7FC /* libavcodec.a */,
+				E8DEFDD420F372480075E7FC /* libavdevice.a */,
+				E8DEFDD920F372490075E7FC /* libavfilter.a */,
+				E8DEFDD620F372490075E7FC /* libavformat.a */,
+				E8DEFDD720F372490075E7FC /* libavutil.a */,
+				E8DEFDD820F372490075E7FC /* libswresample.a */,
+				E8DEFDDA20F372490075E7FC /* libswscale.a */,
+				E899006220F33E620041EF73 /* libresolv.tbd */,
+				E899006020F33DEA0041EF73 /* SystemConfiguration.framework */,
+				E899005E20F30C720041EF73 /* libiconv.2.tbd */,
+				E899005C20F30C3F0041EF73 /* libxml2.tbd */,
+				E899005A20F30C2C0041EF73 /* libc++.tbd */,
+				E899005520F2246C0041EF73 /* TTTRtcEngineKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E850B7AC1F467A3B00AC4A1D /* TTTRtcEngineDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E850B7BC1F467A3B00AC4A1D /* Build configuration list for PBXNativeTarget "TTTRtcEngineDemo" */;
+			buildPhases = (
+				E850B7A91F467A3B00AC4A1D /* Sources */,
+				E850B7AA1F467A3B00AC4A1D /* Frameworks */,
+				E850B7AB1F467A3B00AC4A1D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = TTTRtcEngineDemo;
+			productName = WSTDemo;
+			productReference = E850B7AD1F467A3B00AC4A1D /* TTTRtcEngineDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E850B7A51F467A3B00AC4A1D /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0830;
+				LastUpgradeCheck = 1020;
+				ORGANIZATIONNAME = 3ttech;
+				TargetAttributes = {
+					E850B7AC1F467A3B00AC4A1D = {
+						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 7XP66VHL84;
+						LastSwiftMigration = 1020;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = E850B7A81F467A3B00AC4A1D /* Build configuration list for PBXProject "TTTRtcEngineDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				English,
+				en,
+				Base,
+			);
+			mainGroup = E850B7A41F467A3B00AC4A1D;
+			productRefGroup = E850B7AE1F467A3B00AC4A1D /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E850B7AC1F467A3B00AC4A1D /* TTTRtcEngineDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E850B7AB1F467A3B00AC4A1D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E80701F920F5EFC8004B4630 /* UserVideoContainer.xib in Resources */,
+				E850B7B51F467A3B00AC4A1D /* Assets.xcassets in Resources */,
+				E8DEFDF620F46F2C0075E7FC /* LiveRoom.storyboard in Resources */,
+				E80701FD20F5F07C004B4630 /* UserVideoControl.xib in Resources */,
+				E811E983229FBE1700207C32 /* forever.mp3 in Resources */,
+				E850B7B81F467A3B00AC4A1D /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E850B7A91F467A3B00AC4A1D /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E850B7C51F46F02000AC4A1D /* StreamingPlayerViewController.swift in Sources */,
+				E80701F820F5EFC8004B4630 /* UserVideoContainer.swift in Sources */,
+				E8E54CB51F47EE6C004C91F1 /* Application.swift in Sources */,
+				E8DEFDF920F473F00075E7FC /* LiveRoomWindowController.swift in Sources */,
+				E80701FB20F5F018004B4630 /* UserVideoControl.swift in Sources */,
+				E850B7B31F467A3B00AC4A1D /* ViewController.swift in Sources */,
+				E80F7F8D20F72A3600746162 /* TTTUser.swift in Sources */,
+				E892109B22A7DB3900B5B1C6 /* ProgressHUD.swift in Sources */,
+				E850B7C81F46F12E00AC4A1D /* MainWindowController.swift in Sources */,
+				E8DEFDFC20F494E80075E7FC /* LiveRoomViewController.swift in Sources */,
+				E899005820F245000041EF73 /* LoginViewController.swift in Sources */,
+				E850B7C21F46EFAA00AC4A1D /* StreamingUrlsViewController.swift in Sources */,
+				E850B7B11F467A3B00AC4A1D /* AppDelegate.swift in Sources */,
+				E850B7C01F46D9BE00AC4A1D /* MainTabViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		E850B7B61F467A3B00AC4A1D /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E850B7B71F467A3B00AC4A1D /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		E8DEFDF420F46F2C0075E7FC /* LiveRoom.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E8DEFDF520F46F2C0075E7FC /* Base */,
+			);
+			name = LiveRoom.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		E850B7BA1F467A3B00AC4A1D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				VALID_ARCHS = x86_64;
+			};
+			name = Debug;
+		};
+		E850B7BB1F467A3B00AC4A1D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "-";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				VALID_ARCHS = x86_64;
+			};
+			name = Release;
+		};
+		E850B7BD1F467A3B00AC4A1D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 7XP66VHL84;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../../../Api/macFrameworks/TTTRtcEngineKit";
+				INFOPLIST_FILE = "$(SRCROOT)/TTTRtcEngineDemo/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../../../Api/macFrameworks/player/ffmpeg";
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.3ttech.TTTRtcEngineDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "TTTRtcEngineDemo/TTTRtcEngine-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				VALID_ARCHS = x86_64;
+			};
+			name = Debug;
+		};
+		E850B7BE1F467A3B00AC4A1D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 7XP66VHL84;
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../../../Api/macFrameworks/TTTRtcEngineKit";
+				INFOPLIST_FILE = "$(SRCROOT)/TTTRtcEngineDemo/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../../../Api/macFrameworks/player/ffmpeg";
+				OTHER_LDFLAGS = "";
+				PRODUCT_BUNDLE_IDENTIFIER = com.3ttech.TTTRtcEngineDemo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "TTTRtcEngineDemo/TTTRtcEngine-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				VALID_ARCHS = x86_64;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E850B7A81F467A3B00AC4A1D /* Build configuration list for PBXProject "TTTRtcEngineDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E850B7BA1F467A3B00AC4A1D /* Debug */,
+				E850B7BB1F467A3B00AC4A1D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E850B7BC1F467A3B00AC4A1D /* Build configuration list for PBXNativeTarget "TTTRtcEngineDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E850B7BD1F467A3B00AC4A1D /* Debug */,
+				E850B7BE1F467A3B00AC4A1D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E850B7A51F467A3B00AC4A1D /* Project object */;
+}

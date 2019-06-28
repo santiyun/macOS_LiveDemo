@@ -1,0 +1,577 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="xOa-l2-gYs">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Window Controller-->
+        <scene sceneID="Yvx-LL-EeS">
+            <objects>
+                <windowController id="xOa-l2-gYs" customClass="LiveRoomWindowController" customModule="TTTRtcEngineDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <window key="window" title="直播连麦" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="" animationBehavior="default" id="rfw-qm-CMj">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES"/>
+                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+                        <rect key="contentRect" x="232" y="240" width="600" height="480"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
+                        <toolbar key="toolbar" implicitIdentifier="4588A2E4-F28D-4B24-A73A-5715787B70ED" autosavesConfiguration="NO" displayMode="iconOnly" sizeMode="regular" id="PuL-mi-sVz">
+                            <allowedToolbarItems>
+                                <toolbarItem implicitItemIdentifier="8253DCC3-2D24-470D-AFF4-F8EDD7DCFAA4" label="" paletteLabel="启用本地视频" toolTip="点击禁用本地视频" tag="1" image="Camera" id="awD-E7-Y8h">
+                                    <size key="minSize" width="32" height="33"/>
+                                    <size key="maxSize" width="32" height="33"/>
+                                    <connections>
+                                        <action selector="enableLocalVideo:" target="xOa-l2-gYs" id="hJ4-ER-FOZ"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="8EB8E170-53CD-47DB-8791-1450C9750632" label="" paletteLabel="发送音频流" toolTip="点击停止发送音频流" image="mic" id="HrC-aZ-ZYa">
+                                    <size key="minSize" width="23" height="30"/>
+                                    <size key="maxSize" width="23" height="30"/>
+                                    <connections>
+                                        <action selector="muteLocalAudioStream:" target="xOa-l2-gYs" id="5Vj-R1-lTM"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="7D8B89DA-39A4-4822-9425-6441E5F2723E" label="" paletteLabel="看所有人" toolTip="点击不看所有人" image="video" id="Aba-Ot-yJq">
+                                    <size key="minSize" width="35" height="36"/>
+                                    <size key="maxSize" width="35" height="36"/>
+                                    <connections>
+                                        <action selector="muteAllRemoteVideoStreams:" target="xOa-l2-gYs" id="z13-IW-ncv"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="645765C3-1216-45D5-A87B-BAF7262192C4" label="" paletteLabel="听所有人" toolTip="点击不听所有人" image="voice_big" id="XCw-cf-H2t">
+                                    <size key="minSize" width="35" height="36"/>
+                                    <size key="maxSize" width="35" height="36"/>
+                                    <connections>
+                                        <action selector="muteAllRemoteAudioStreams:" target="xOa-l2-gYs" id="RpN-xh-ubN"/>
+                                    </connections>
+                                </toolbarItem>
+                                <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="U10-nC-tXa"/>
+                                <toolbarItem implicitItemIdentifier="NSToolbarFlexibleSpaceItem" id="a09-HD-RhR"/>
+                                <toolbarItem implicitItemIdentifier="02DCEC58-C011-4FBC-AFD7-678449A97368" label="" paletteLabel="退出房间" toolTip="点击退出房间" tag="-1" image="exit" id="9Eo-8J-MA0">
+                                    <connections>
+                                        <action selector="exitRoom:" target="xOa-l2-gYs" id="mew-16-YWe"/>
+                                    </connections>
+                                </toolbarItem>
+                            </allowedToolbarItems>
+                            <defaultToolbarItems>
+                                <toolbarItem reference="awD-E7-Y8h"/>
+                                <toolbarItem reference="HrC-aZ-ZYa"/>
+                                <toolbarItem reference="U10-nC-tXa"/>
+                                <toolbarItem reference="Aba-Ot-yJq"/>
+                                <toolbarItem reference="XCw-cf-H2t"/>
+                                <toolbarItem reference="U10-nC-tXa"/>
+                                <toolbarItem reference="a09-HD-RhR"/>
+                                <toolbarItem reference="9Eo-8J-MA0"/>
+                            </defaultToolbarItems>
+                        </toolbar>
+                        <connections>
+                            <outlet property="delegate" destination="xOa-l2-gYs" id="2Hu-av-dzQ"/>
+                        </connections>
+                    </window>
+                    <connections>
+                        <outlet property="toolbarItemEnableLocalVideo" destination="awD-E7-Y8h" id="i0O-hB-vv7"/>
+                        <segue destination="JJV-gM-iwm" kind="relationship" relationship="window.shadowedContentViewController" id="yvu-8j-iC5"/>
+                    </connections>
+                </windowController>
+                <customObject id="10i-j3-VwK" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-714" y="14"/>
+        </scene>
+        <!--Live Room View Controller-->
+        <scene sceneID="S1J-Mw-aVn">
+            <objects>
+                <viewController id="JJV-gM-iwm" customClass="LiveRoomViewController" customModule="TTTRtcEngineDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="1Zh-1U-xRy">
+                        <rect key="frame" x="0.0" y="0.0" width="792" height="722"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="rNt-cu-Q9j" userLabel="HCenterLine">
+                                <rect key="frame" x="395" y="0.0" width="2" height="1"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="Jna-SF-759"/>
+                                    <constraint firstAttribute="width" constant="2" id="lyJ-u5-V6Q"/>
+                                </constraints>
+                            </customView>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="1ha-sy-YiO" userLabel="ViewHuge">
+                                <rect key="frame" x="8" y="404" width="389" height="292"/>
+                                <subviews>
+                                    <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EYg-kk-gBl" customClass="UserVideoContainer" customModule="TTTRtcEngineDemo" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="389" height="292"/>
+                                    </customView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="EYg-kk-gBl" firstAttribute="leading" secondItem="1ha-sy-YiO" secondAttribute="leading" id="AUF-6c-53q"/>
+                                    <constraint firstAttribute="width" secondItem="1ha-sy-YiO" secondAttribute="height" multiplier="4:3" id="Lfn-LR-jb6"/>
+                                    <constraint firstAttribute="bottom" secondItem="EYg-kk-gBl" secondAttribute="bottom" id="SAI-le-tDL"/>
+                                    <constraint firstItem="EYg-kk-gBl" firstAttribute="top" secondItem="1ha-sy-YiO" secondAttribute="top" id="Zd4-zX-XYT"/>
+                                    <constraint firstAttribute="trailing" secondItem="EYg-kk-gBl" secondAttribute="trailing" id="dOm-mc-7fV"/>
+                                </constraints>
+                            </customView>
+                            <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="acO-ET-wkg" userLabel="ViewRoom">
+                                <rect key="frame" x="12" y="701" width="101" height="17"/>
+                                <subviews>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IUn-5R-Fh2">
+                                        <rect key="frame" x="-2" y="0.0" width="35" height="17"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="房间:" id="djq-MJ-med">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="systemBlueColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="O1u-fJ-Q3x">
+                                        <rect key="frame" x="37" y="0.0" width="66" height="17"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="12345678" id="R2I-Ci-Ojp">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="systemBlueColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </subviews>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
+                            <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="z2Z-W1-x06" userLabel="ViewRtmpUrl">
+                                <rect key="frame" x="405" y="698" width="379" height="22"/>
+                                <subviews>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="W4e-eH-hhs">
+                                        <rect key="frame" x="-2" y="3" width="61" height="17"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="拉流地址:" id="gj0-bE-cDg">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="systemBlueColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="lga-ok-MJw">
+                                        <rect key="frame" x="65" y="0.0" width="314" height="22"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" drawsBackground="YES" id="r5y-q6-BQT">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="systemBlueColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="W4e-eH-hhs" firstAttribute="centerY" secondItem="lga-ok-MJw" secondAttribute="centerY" id="7Md-KM-U9U"/>
+                                </constraints>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
+                            <tabView translatesAutoresizingMaskIntoConstraints="NO" id="z51-i2-ayX">
+                                <rect key="frame" x="398" y="394" width="393" height="304"/>
+                                <font key="font" metaFont="system"/>
+                                <tabViewItems>
+                                    <tabViewItem label="伴奏" identifier="AudioMixing" id="Vr9-Oa-5kO">
+                                        <view key="view" id="vqf-JV-c8P">
+                                            <rect key="frame" x="10" y="33" width="373" height="258"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <button translatesAutoresizingMaskIntoConstraints="NO" id="2lH-cy-2nb">
+                                                    <rect key="frame" x="4" y="222" width="32" height="32"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="32" id="NLB-sV-Dwv"/>
+                                                        <constraint firstAttribute="width" constant="32" id="Pzn-RK-9fO"/>
+                                                    </constraints>
+                                                    <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSFolder" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="muy-zv-JQi">
+                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                    <connections>
+                                                        <action selector="selectAudioMixingFile:" target="JJV-gM-iwm" id="m16-O3-8nZ"/>
+                                                    </connections>
+                                                </button>
+                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qev-oK-2Fc">
+                                                    <rect key="frame" x="38" y="230" width="329" height="17"/>
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" id="U3a-bh-fBp">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                                <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1u4-Xc-cfE">
+                                                    <rect key="frame" x="38" y="197" width="289" height="19"/>
+                                                    <sliderCell key="cell" enabled="NO" state="on" alignment="left" maxValue="100" tickMarkPosition="below" sliderType="linear" id="Tnb-7t-U8P">
+                                                        <connections>
+                                                            <action selector="sliderAudioMixingAction:" target="JJV-gM-iwm" id="faN-a7-MKI"/>
+                                                        </connections>
+                                                    </sliderCell>
+                                                </slider>
+                                                <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="13" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RuJ-G6-OVJ">
+                                                    <rect key="frame" x="51" y="142" width="272" height="21"/>
+                                                    <subviews>
+                                                        <button verticalHuggingPriority="750" tag="-1" translatesAutoresizingMaskIntoConstraints="NO" id="Zte-94-25s">
+                                                            <rect key="frame" x="-6" y="-7" width="94" height="32"/>
+                                                            <buttonCell key="cell" type="push" title="开始播放" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="lyK-q8-fnw">
+                                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                <font key="font" metaFont="system"/>
+                                                            </buttonCell>
+                                                            <connections>
+                                                                <action selector="startAudioMixing:" target="JJV-gM-iwm" id="V2L-aw-9bI"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6vG-vM-s5Y">
+                                                            <rect key="frame" x="89" y="-7" width="94" height="32"/>
+                                                            <buttonCell key="cell" type="push" title="暂停播放" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="86o-au-wqF">
+                                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                <font key="font" metaFont="system"/>
+                                                            </buttonCell>
+                                                            <connections>
+                                                                <action selector="pauseResumeAudioMixing:" target="JJV-gM-iwm" id="6f5-dB-Hwk"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iNb-hi-9YJ">
+                                                            <rect key="frame" x="184" y="-7" width="94" height="32"/>
+                                                            <buttonCell key="cell" type="push" title="停止播放" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="QE2-Jf-XJ8">
+                                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                <font key="font" metaFont="system"/>
+                                                            </buttonCell>
+                                                            <connections>
+                                                                <action selector="stopAudioMixing:" target="JJV-gM-iwm" id="vZ8-2f-erR"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <visibilityPriorities>
+                                                        <integer value="1000"/>
+                                                        <integer value="1000"/>
+                                                        <integer value="1000"/>
+                                                    </visibilityPriorities>
+                                                    <customSpacing>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                    </customSpacing>
+                                                </stackView>
+                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aeO-fd-O8F">
+                                                    <rect key="frame" x="331" y="198" width="36" height="17"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="32" id="sfC-hY-kgq"/>
+                                                    </constraints>
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" id="3jD-iT-bux">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                                <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="8tH-YC-a0B">
+                                                    <rect key="frame" x="38" y="175" width="129" height="18"/>
+                                                    <buttonCell key="cell" type="check" title="只有本地可以听到" bezelStyle="regularSquare" imagePosition="left" enabled="NO" state="on" inset="2" id="v6j-ZF-5Hv">
+                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="8tH-YC-a0B" secondAttribute="trailing" constant="20" symbolic="YES" id="52j-kS-oVh"/>
+                                                <constraint firstItem="aeO-fd-O8F" firstAttribute="leading" secondItem="1u4-Xc-cfE" secondAttribute="trailing" constant="8" id="72E-Qc-cd1"/>
+                                                <constraint firstItem="2lH-cy-2nb" firstAttribute="top" secondItem="vqf-JV-c8P" secondAttribute="top" constant="4" id="B7c-pG-a1e"/>
+                                                <constraint firstItem="qev-oK-2Fc" firstAttribute="leading" secondItem="2lH-cy-2nb" secondAttribute="trailing" constant="4" id="E0R-fw-cnM"/>
+                                                <constraint firstItem="1u4-Xc-cfE" firstAttribute="leading" secondItem="qev-oK-2Fc" secondAttribute="leading" id="HHJ-0X-TIB"/>
+                                                <constraint firstItem="8tH-YC-a0B" firstAttribute="top" secondItem="1u4-Xc-cfE" secondAttribute="bottom" constant="8" id="HfM-QC-g25"/>
+                                                <constraint firstItem="1u4-Xc-cfE" firstAttribute="top" secondItem="2lH-cy-2nb" secondAttribute="bottom" constant="8" id="Ufc-VF-c5f"/>
+                                                <constraint firstItem="aeO-fd-O8F" firstAttribute="trailing" secondItem="qev-oK-2Fc" secondAttribute="trailing" id="X6e-yd-B3V"/>
+                                                <constraint firstItem="8tH-YC-a0B" firstAttribute="leading" secondItem="1u4-Xc-cfE" secondAttribute="leading" id="YEL-tL-AXI"/>
+                                                <constraint firstItem="qev-oK-2Fc" firstAttribute="centerY" secondItem="2lH-cy-2nb" secondAttribute="centerY" id="YtI-Z7-8OB"/>
+                                                <constraint firstItem="RuJ-G6-OVJ" firstAttribute="centerX" secondItem="vqf-JV-c8P" secondAttribute="centerX" id="ai2-fX-q9u"/>
+                                                <constraint firstAttribute="trailing" secondItem="qev-oK-2Fc" secondAttribute="trailing" constant="8" id="jFg-NI-acg"/>
+                                                <constraint firstItem="RuJ-G6-OVJ" firstAttribute="top" secondItem="1u4-Xc-cfE" secondAttribute="bottom" constant="36" id="kYM-Wj-9of"/>
+                                                <constraint firstItem="1u4-Xc-cfE" firstAttribute="centerY" secondItem="aeO-fd-O8F" secondAttribute="centerY" id="qlp-aD-J4s"/>
+                                                <constraint firstItem="2lH-cy-2nb" firstAttribute="leading" secondItem="vqf-JV-c8P" secondAttribute="leading" constant="4" id="y3x-X4-rCI"/>
+                                            </constraints>
+                                        </view>
+                                    </tabViewItem>
+                                    <tabViewItem label="音效" identifier="SoundEffect" id="wzL-Xz-5sY">
+                                        <view key="view" id="g7B-JA-RRn">
+                                            <rect key="frame" x="10" y="33" width="373" height="258"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="36" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bxG-ch-Thd">
+                                                    <rect key="frame" x="57" y="60" width="260" height="21"/>
+                                                    <subviews>
+                                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LUx-WZ-Mpn">
+                                                            <rect key="frame" x="-6" y="-7" width="124" height="32"/>
+                                                            <buttonCell key="cell" type="push" title="全部暂停" bezelStyle="rounded" image="btn_player_pause" imagePosition="leading" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="NHe-NK-BHO">
+                                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                <font key="font" metaFont="system"/>
+                                                            </buttonCell>
+                                                            <connections>
+                                                                <action selector="playPauseAllSoundEffect:" target="JJV-gM-iwm" id="x5b-f1-wMV"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ixh-Em-gtq">
+                                                            <rect key="frame" x="142" y="-7" width="124" height="32"/>
+                                                            <buttonCell key="cell" type="push" title="全部停止" bezelStyle="rounded" image="btn_player_stop" imagePosition="leading" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Irk-Ol-uD9">
+                                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                <font key="font" metaFont="system"/>
+                                                            </buttonCell>
+                                                            <connections>
+                                                                <action selector="stopAllSoundEffect:" target="JJV-gM-iwm" id="8dh-gf-49y"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <visibilityPriorities>
+                                                        <integer value="1000"/>
+                                                        <integer value="1000"/>
+                                                    </visibilityPriorities>
+                                                    <customSpacing>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                    </customSpacing>
+                                                </stackView>
+                                                <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="16" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PS0-ob-BqJ">
+                                                    <rect key="frame" x="161" y="203" width="196" height="21"/>
+                                                    <subviews>
+                                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="08v-HC-FJe">
+                                                            <rect key="frame" x="-6" y="-7" width="102" height="32"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="90" id="NPb-pr-su2"/>
+                                                                <constraint firstAttribute="height" constant="21" id="cL4-5V-LLG"/>
+                                                            </constraints>
+                                                            <buttonCell key="cell" type="push" title="播放" bezelStyle="rounded" image="btn_player_play" imagePosition="left" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="nTO-Ph-NoH">
+                                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                <font key="font" metaFont="system"/>
+                                                            </buttonCell>
+                                                            <connections>
+                                                                <action selector="playPauseSoundEffect_1:" target="JJV-gM-iwm" id="d6d-J0-V1C"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Kbr-tF-eRb">
+                                                            <rect key="frame" x="100" y="-7" width="102" height="32"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="21" id="mak-hd-Hfw"/>
+                                                            </constraints>
+                                                            <buttonCell key="cell" type="push" title="停止" bezelStyle="rounded" image="btn_player_stop" imagePosition="left" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6Bx-Ck-CUB">
+                                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                <font key="font" metaFont="system"/>
+                                                            </buttonCell>
+                                                            <connections>
+                                                                <action selector="stopSoundEffect_1:" target="JJV-gM-iwm" id="aSS-Ua-3lU"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="Kbr-tF-eRb" firstAttribute="width" secondItem="08v-HC-FJe" secondAttribute="width" id="ETk-oM-hY3"/>
+                                                    </constraints>
+                                                    <visibilityPriorities>
+                                                        <integer value="1000"/>
+                                                        <integer value="1000"/>
+                                                    </visibilityPriorities>
+                                                    <customSpacing>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                    </customSpacing>
+                                                </stackView>
+                                                <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="16" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ecj-Ee-Tai">
+                                                    <rect key="frame" x="161" y="146" width="196" height="21"/>
+                                                    <subviews>
+                                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PLI-kp-Ydi">
+                                                            <rect key="frame" x="-6" y="-7" width="102" height="32"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="21" id="geE-Se-gWI"/>
+                                                            </constraints>
+                                                            <buttonCell key="cell" type="push" title="播放" bezelStyle="rounded" image="btn_player_play" imagePosition="left" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ZGf-W7-wb3">
+                                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                <font key="font" metaFont="system"/>
+                                                            </buttonCell>
+                                                            <connections>
+                                                                <action selector="playPauseSoundEffect_2:" target="JJV-gM-iwm" id="uPB-Kf-BcQ"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tFi-Ra-wJv">
+                                                            <rect key="frame" x="100" y="-7" width="102" height="32"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="21" id="SxS-fJ-e5c"/>
+                                                            </constraints>
+                                                            <buttonCell key="cell" type="push" title="停止" bezelStyle="rounded" image="btn_player_stop" imagePosition="left" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="mE1-XW-aEd">
+                                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                <font key="font" metaFont="system"/>
+                                                            </buttonCell>
+                                                            <connections>
+                                                                <action selector="stopSoundEffect_2:" target="JJV-gM-iwm" id="hsG-4i-Kqj"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <constraints>
+                                                        <constraint firstItem="tFi-Ra-wJv" firstAttribute="width" secondItem="PLI-kp-Ydi" secondAttribute="width" id="SvO-wS-5p6"/>
+                                                    </constraints>
+                                                    <visibilityPriorities>
+                                                        <integer value="1000"/>
+                                                        <integer value="1000"/>
+                                                    </visibilityPriorities>
+                                                    <customSpacing>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                    </customSpacing>
+                                                </stackView>
+                                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Jtm-68-hiw">
+                                                    <rect key="frame" x="16" y="201" width="22" height="25"/>
+                                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="music_logo" id="fh3-92-gJ1"/>
+                                                </imageView>
+                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="BTg-v3-nxH">
+                                                    <rect key="frame" x="44" y="205" width="55" height="17"/>
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="For Ever" id="g2x-dj-jGT">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PXy-4Q-6Mi">
+                                                    <rect key="frame" x="16" y="144" width="22" height="25"/>
+                                                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="music_logo" id="Qrd-75-kjx"/>
+                                                </imageView>
+                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YIR-SH-uRz">
+                                                    <rect key="frame" x="44" y="148" width="53" height="17"/>
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Our Sky" id="Iku-UW-pMh">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="BTg-v3-nxH" firstAttribute="centerY" secondItem="Jtm-68-hiw" secondAttribute="centerY" id="2zT-mx-m9b"/>
+                                                <constraint firstItem="PXy-4Q-6Mi" firstAttribute="leading" secondItem="Jtm-68-hiw" secondAttribute="leading" id="53t-4Y-vw1"/>
+                                                <constraint firstItem="Jtm-68-hiw" firstAttribute="leading" secondItem="g7B-JA-RRn" secondAttribute="leading" constant="16" id="CAV-4x-uZO"/>
+                                                <constraint firstItem="PS0-ob-BqJ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="BTg-v3-nxH" secondAttribute="trailing" constant="8" symbolic="YES" id="CjI-s6-7dS"/>
+                                                <constraint firstItem="PS0-ob-BqJ" firstAttribute="centerY" secondItem="Jtm-68-hiw" secondAttribute="centerY" id="EgG-G0-sfl"/>
+                                                <constraint firstItem="Ecj-Ee-Tai" firstAttribute="centerY" secondItem="PXy-4Q-6Mi" secondAttribute="centerY" id="OQa-f9-x9G"/>
+                                                <constraint firstItem="Ecj-Ee-Tai" firstAttribute="leading" secondItem="PS0-ob-BqJ" secondAttribute="leading" id="OaV-u2-1jd"/>
+                                                <constraint firstItem="YIR-SH-uRz" firstAttribute="centerY" secondItem="PXy-4Q-6Mi" secondAttribute="centerY" id="RZx-14-o8N"/>
+                                                <constraint firstItem="Jtm-68-hiw" firstAttribute="top" secondItem="g7B-JA-RRn" secondAttribute="top" constant="32" id="Swq-Ru-STE"/>
+                                                <constraint firstItem="YIR-SH-uRz" firstAttribute="leading" secondItem="BTg-v3-nxH" secondAttribute="leading" id="TNl-OE-c5O"/>
+                                                <constraint firstItem="PXy-4Q-6Mi" firstAttribute="top" secondItem="Jtm-68-hiw" secondAttribute="bottom" constant="32" id="a8k-in-MFI"/>
+                                                <constraint firstItem="bxG-ch-Thd" firstAttribute="centerX" secondItem="g7B-JA-RRn" secondAttribute="centerX" id="h3U-kR-mBP"/>
+                                                <constraint firstItem="PLI-kp-Ydi" firstAttribute="width" secondItem="08v-HC-FJe" secondAttribute="width" id="hie-KR-l5b"/>
+                                                <constraint firstItem="Ecj-Ee-Tai" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="YIR-SH-uRz" secondAttribute="trailing" constant="8" symbolic="YES" id="mcM-DO-zBQ"/>
+                                                <constraint firstAttribute="trailing" secondItem="PS0-ob-BqJ" secondAttribute="trailing" constant="16" id="pY6-jt-Hf5"/>
+                                                <constraint firstItem="BTg-v3-nxH" firstAttribute="leading" secondItem="Jtm-68-hiw" secondAttribute="trailing" constant="8" id="wxP-qk-QJ3"/>
+                                                <constraint firstAttribute="bottom" secondItem="bxG-ch-Thd" secondAttribute="bottom" constant="60" id="yZr-KQ-LpP"/>
+                                            </constraints>
+                                        </view>
+                                    </tabViewItem>
+                                </tabViewItems>
+                                <connections>
+                                    <outlet property="delegate" destination="JJV-gM-iwm" id="M01-cQ-gAV"/>
+                                </connections>
+                            </tabView>
+                            <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Wdm-Md-9hH" customClass="UserVideoContainer" customModule="TTTRtcEngineDemo" customModuleProvider="target">
+                                <rect key="frame" x="8" y="206" width="256" height="192"/>
+                            </customView>
+                            <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="pWB-ra-Zp8" customClass="UserVideoContainer" customModule="TTTRtcEngineDemo" customModuleProvider="target">
+                                <rect key="frame" x="268" y="206" width="256" height="192"/>
+                            </customView>
+                            <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8C6-Jp-32M" customClass="UserVideoContainer" customModule="TTTRtcEngineDemo" customModuleProvider="target">
+                                <rect key="frame" x="528" y="206" width="256" height="192"/>
+                            </customView>
+                            <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="TgB-WL-nPL" customClass="UserVideoContainer" customModule="TTTRtcEngineDemo" customModuleProvider="target">
+                                <rect key="frame" x="528" y="8" width="256" height="192"/>
+                            </customView>
+                            <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f5H-3L-7db" customClass="UserVideoContainer" customModule="TTTRtcEngineDemo" customModuleProvider="target">
+                                <rect key="frame" x="268" y="8" width="256" height="192"/>
+                            </customView>
+                            <customView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jm4-3Y-ulc" customClass="UserVideoContainer" customModule="TTTRtcEngineDemo" customModuleProvider="target">
+                                <rect key="frame" x="8" y="8" width="256" height="192"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Jm4-3Y-ulc" secondAttribute="height" multiplier="4:3" id="oSS-Cg-194"/>
+                                    <constraint firstAttribute="height" constant="192" id="xrX-Cw-Dfs"/>
+                                </constraints>
+                            </customView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="z2Z-W1-x06" firstAttribute="centerY" secondItem="acO-ET-wkg" secondAttribute="centerY" id="3eT-vi-ejF"/>
+                            <constraint firstItem="f5H-3L-7db" firstAttribute="bottom" secondItem="Jm4-3Y-ulc" secondAttribute="bottom" id="3sX-zj-irw"/>
+                            <constraint firstItem="Jm4-3Y-ulc" firstAttribute="leading" secondItem="1Zh-1U-xRy" secondAttribute="leading" constant="8" id="4uD-h9-mrn"/>
+                            <constraint firstItem="TgB-WL-nPL" firstAttribute="leading" secondItem="f5H-3L-7db" secondAttribute="trailing" constant="4" id="5eg-gE-jNV"/>
+                            <constraint firstItem="z51-i2-ayX" firstAttribute="top" secondItem="1ha-sy-YiO" secondAttribute="top" constant="4" id="6ej-YN-s6t"/>
+                            <constraint firstItem="Wdm-Md-9hH" firstAttribute="trailing" secondItem="Jm4-3Y-ulc" secondAttribute="trailing" id="8C8-6C-zr5"/>
+                            <constraint firstItem="rNt-cu-Q9j" firstAttribute="centerX" secondItem="1Zh-1U-xRy" secondAttribute="centerX" id="AyO-we-FC1"/>
+                            <constraint firstItem="acO-ET-wkg" firstAttribute="leading" secondItem="1ha-sy-YiO" secondAttribute="leading" constant="4" id="Ci1-96-RIA"/>
+                            <constraint firstItem="z2Z-W1-x06" firstAttribute="leading" secondItem="z51-i2-ayX" secondAttribute="leading" id="ESa-Qt-rIq"/>
+                            <constraint firstItem="z51-i2-ayX" firstAttribute="trailing" secondItem="8C6-Jp-32M" secondAttribute="trailing" id="GPB-rh-7fq"/>
+                            <constraint firstAttribute="bottom" secondItem="rNt-cu-Q9j" secondAttribute="bottom" id="Jss-zn-4iI"/>
+                            <constraint firstItem="8C6-Jp-32M" firstAttribute="top" secondItem="pWB-ra-Zp8" secondAttribute="top" id="RsG-hO-OIK"/>
+                            <constraint firstItem="z51-i2-ayX" firstAttribute="leading" secondItem="rNt-cu-Q9j" secondAttribute="leading" constant="10" id="SEj-tk-4fc"/>
+                            <constraint firstItem="Jm4-3Y-ulc" firstAttribute="top" secondItem="Wdm-Md-9hH" secondAttribute="bottom" constant="6" id="UdS-Hw-cYi"/>
+                            <constraint firstItem="Wdm-Md-9hH" firstAttribute="top" secondItem="1ha-sy-YiO" secondAttribute="bottom" constant="6" id="Whi-N8-LXx"/>
+                            <constraint firstItem="8C6-Jp-32M" firstAttribute="trailing" secondItem="TgB-WL-nPL" secondAttribute="trailing" id="XhU-ch-gtq"/>
+                            <constraint firstItem="8C6-Jp-32M" firstAttribute="leading" secondItem="TgB-WL-nPL" secondAttribute="leading" id="YJC-5n-BSx"/>
+                            <constraint firstAttribute="bottom" secondItem="Jm4-3Y-ulc" secondAttribute="bottom" constant="8" id="YoG-St-TG7"/>
+                            <constraint firstItem="f5H-3L-7db" firstAttribute="width" secondItem="Jm4-3Y-ulc" secondAttribute="width" id="aL3-n5-3gT"/>
+                            <constraint firstItem="z51-i2-ayX" firstAttribute="bottom" secondItem="1ha-sy-YiO" secondAttribute="bottom" id="agw-y5-Aib"/>
+                            <constraint firstItem="acO-ET-wkg" firstAttribute="top" secondItem="1Zh-1U-xRy" secondAttribute="top" constant="4" id="bOM-0g-8vC"/>
+                            <constraint firstItem="TgB-WL-nPL" firstAttribute="bottom" secondItem="f5H-3L-7db" secondAttribute="bottom" id="bne-gC-edP"/>
+                            <constraint firstItem="Wdm-Md-9hH" firstAttribute="leading" secondItem="Jm4-3Y-ulc" secondAttribute="leading" id="dXE-cM-B6z"/>
+                            <constraint firstItem="Wdm-Md-9hH" firstAttribute="height" secondItem="Jm4-3Y-ulc" secondAttribute="height" id="hb6-Yp-nKj"/>
+                            <constraint firstItem="pWB-ra-Zp8" firstAttribute="leading" secondItem="f5H-3L-7db" secondAttribute="leading" id="i76-TR-QR9"/>
+                            <constraint firstItem="8C6-Jp-32M" firstAttribute="bottom" secondItem="pWB-ra-Zp8" secondAttribute="bottom" id="jEi-yO-Fxz"/>
+                            <constraint firstItem="1ha-sy-YiO" firstAttribute="leading" secondItem="1Zh-1U-xRy" secondAttribute="leading" constant="8" id="k5a-O2-Rci"/>
+                            <constraint firstItem="TgB-WL-nPL" firstAttribute="width" secondItem="f5H-3L-7db" secondAttribute="width" id="mkW-Mw-xPr"/>
+                            <constraint firstItem="pWB-ra-Zp8" firstAttribute="top" secondItem="Wdm-Md-9hH" secondAttribute="top" id="mnQ-b4-s5Y"/>
+                            <constraint firstAttribute="trailing" secondItem="TgB-WL-nPL" secondAttribute="trailing" constant="8" id="mqh-q8-IQ6"/>
+                            <constraint firstItem="1ha-sy-YiO" firstAttribute="top" secondItem="1Zh-1U-xRy" secondAttribute="top" constant="26" id="q0g-VK-O1G"/>
+                            <constraint firstItem="f5H-3L-7db" firstAttribute="leading" secondItem="Jm4-3Y-ulc" secondAttribute="trailing" constant="4" id="tsw-uH-ynX"/>
+                            <constraint firstItem="z2Z-W1-x06" firstAttribute="trailing" secondItem="8C6-Jp-32M" secondAttribute="trailing" id="uUE-v3-xz7"/>
+                            <constraint firstItem="1ha-sy-YiO" firstAttribute="trailing" secondItem="rNt-cu-Q9j" secondAttribute="trailing" id="vbP-vt-N7w"/>
+                            <constraint firstItem="f5H-3L-7db" firstAttribute="top" secondItem="Jm4-3Y-ulc" secondAttribute="top" id="yEz-3X-vJB"/>
+                            <constraint firstItem="pWB-ra-Zp8" firstAttribute="trailing" secondItem="f5H-3L-7db" secondAttribute="trailing" id="ydB-NC-4ic"/>
+                            <constraint firstItem="TgB-WL-nPL" firstAttribute="top" secondItem="f5H-3L-7db" secondAttribute="top" id="zSP-Mo-CmX"/>
+                            <constraint firstItem="pWB-ra-Zp8" firstAttribute="bottom" secondItem="Wdm-Md-9hH" secondAttribute="bottom" id="zoO-52-BKv"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="buttonOnlyLocalHear" destination="8tH-YC-a0B" id="XoT-gP-gSX"/>
+                        <outlet property="buttonPauseAllSoundEffects" destination="LUx-WZ-Mpn" id="BCs-DD-lZc"/>
+                        <outlet property="buttonPauseResumeAudioMixing" destination="6vG-vM-s5Y" id="pEO-4w-bE5"/>
+                        <outlet property="buttonPlaySoundEffect1" destination="08v-HC-FJe" id="x10-Sa-krU"/>
+                        <outlet property="buttonPlaySoundEffect2" destination="PLI-kp-Ydi" id="5in-nh-n5f"/>
+                        <outlet property="buttonSelectAudioFileName" destination="2lH-cy-2nb" id="xRP-yM-kYD"/>
+                        <outlet property="buttonStartAudioMixing" destination="Zte-94-25s" id="GVP-e5-MAs"/>
+                        <outlet property="buttonStopAllSoundEffects" destination="ixh-Em-gtq" id="1sj-KG-7WK"/>
+                        <outlet property="buttonStopAudioMixing" destination="iNb-hi-9YJ" id="5Aq-gT-lL7"/>
+                        <outlet property="buttonStopSoundEffect1" destination="Kbr-tF-eRb" id="3xV-TM-Dzb"/>
+                        <outlet property="buttonStopSoundEffect2" destination="tFi-Ra-wJv" id="xKW-gU-oyb"/>
+                        <outlet property="labelAudioFileName" destination="qev-oK-2Fc" id="XNU-vm-aFB"/>
+                        <outlet property="labelRemainSeconds" destination="aeO-fd-O8F" id="k19-FA-j2F"/>
+                        <outlet property="labelSessionID" destination="O1u-fJ-Q3x" id="yTf-mf-Ptu"/>
+                        <outlet property="sliderAudioMixing" destination="1u4-Xc-cfE" id="MLG-BN-RYc"/>
+                        <outlet property="stackViewSoundEffect1" destination="PS0-ob-BqJ" id="8kx-vy-IhL"/>
+                        <outlet property="stackViewSoundEffect2" destination="Ecj-Ee-Tai" id="5fE-6H-Ubq"/>
+                        <outlet property="tabViewMusic" destination="z51-i2-ayX" id="SC3-pp-iSp"/>
+                        <outlet property="textFieldRtmpUrl" destination="lga-ok-MJw" id="RVc-x3-Wtm"/>
+                        <outlet property="userVideoContainer1" destination="Jm4-3Y-ulc" id="vTU-10-gtp"/>
+                        <outlet property="userVideoContainer2" destination="f5H-3L-7db" id="yh3-fi-tQ9"/>
+                        <outlet property="userVideoContainer3" destination="TgB-WL-nPL" id="Fmp-DP-xED"/>
+                        <outlet property="userVideoContainer4" destination="Wdm-Md-9hH" id="OKE-95-CYt"/>
+                        <outlet property="userVideoContainer5" destination="pWB-ra-Zp8" id="gvg-f2-FcY"/>
+                        <outlet property="userVideoContainer6" destination="8C6-Jp-32M" id="XUY-pm-xVx"/>
+                        <outlet property="userVideoContainerHuge" destination="EYg-kk-gBl" id="a4x-uT-bES"/>
+                    </connections>
+                </viewController>
+                <customObject id="pSz-MU-Feb" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="148" y="-305"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="Camera" width="32" height="32.5"/>
+        <image name="NSFolder" width="32" height="32"/>
+        <image name="btn_player_pause" width="24" height="24.5"/>
+        <image name="btn_player_play" width="24" height="24"/>
+        <image name="btn_player_stop" width="24" height="24.5"/>
+        <image name="exit" width="32" height="32.5"/>
+        <image name="mic" width="32" height="32.5"/>
+        <image name="music_logo" width="22" height="25"/>
+        <image name="video" width="35" height="35.5"/>
+        <image name="voice_big" width="35" height="35.5"/>
+    </resources>
+</document>
