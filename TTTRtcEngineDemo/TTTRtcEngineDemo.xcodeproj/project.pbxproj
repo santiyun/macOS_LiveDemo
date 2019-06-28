@@ -21,21 +21,21 @@
 		E850B7C21F46EFAA00AC4A1D /* StreamingUrlsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E850B7C11F46EFAA00AC4A1D /* StreamingUrlsViewController.swift */; };
 		E850B7C51F46F02000AC4A1D /* StreamingPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E850B7C31F46F02000AC4A1D /* StreamingPlayerViewController.swift */; };
 		E850B7C81F46F12E00AC4A1D /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E850B7C71F46F12E00AC4A1D /* MainWindowController.swift */; };
+		E86ADA3D22C61C95005917AF /* TTTRtcEngineKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E86ADA3C22C61C95005917AF /* TTTRtcEngineKit.framework */; };
+		E86ADA4522C61DDC005917AF /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E86ADA3E22C61DDC005917AF /* libavcodec.a */; };
+		E86ADA4622C61DDC005917AF /* libswresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E86ADA3F22C61DDC005917AF /* libswresample.a */; };
+		E86ADA4722C61DDC005917AF /* libavformat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E86ADA4022C61DDC005917AF /* libavformat.a */; };
+		E86ADA4822C61DDC005917AF /* libavfilter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E86ADA4122C61DDC005917AF /* libavfilter.a */; };
+		E86ADA4922C61DDC005917AF /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E86ADA4222C61DDC005917AF /* libswscale.a */; };
+		E86ADA4A22C61DDC005917AF /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E86ADA4322C61DDC005917AF /* libavutil.a */; };
+		E86ADA4B22C61DDC005917AF /* libavdevice.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E86ADA4422C61DDC005917AF /* libavdevice.a */; };
 		E892109B22A7DB3900B5B1C6 /* ProgressHUD.swift in Sources */ = {isa = PBXBuildFile; fileRef = E892109922A7DB3800B5B1C6 /* ProgressHUD.swift */; };
-		E899005620F2246C0041EF73 /* TTTRtcEngineKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E899005520F2246C0041EF73 /* TTTRtcEngineKit.framework */; };
 		E899005820F245000041EF73 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E899005720F245000041EF73 /* LoginViewController.swift */; };
 		E899005B20F30C2C0041EF73 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E899005A20F30C2C0041EF73 /* libc++.tbd */; };
 		E899005D20F30C3F0041EF73 /* libxml2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E899005C20F30C3F0041EF73 /* libxml2.tbd */; };
 		E899005F20F30C720041EF73 /* libiconv.2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E899005E20F30C720041EF73 /* libiconv.2.tbd */; };
 		E899006120F33DEA0041EF73 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E899006020F33DEA0041EF73 /* SystemConfiguration.framework */; };
 		E899006320F33E620041EF73 /* libresolv.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E899006220F33E620041EF73 /* libresolv.tbd */; };
-		E8DEFDDB20F372490075E7FC /* libavdevice.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E8DEFDD420F372480075E7FC /* libavdevice.a */; };
-		E8DEFDDC20F372490075E7FC /* libavcodec.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E8DEFDD520F372490075E7FC /* libavcodec.a */; };
-		E8DEFDDD20F372490075E7FC /* libavformat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E8DEFDD620F372490075E7FC /* libavformat.a */; };
-		E8DEFDDE20F372490075E7FC /* libavutil.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E8DEFDD720F372490075E7FC /* libavutil.a */; };
-		E8DEFDDF20F372490075E7FC /* libswresample.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E8DEFDD820F372490075E7FC /* libswresample.a */; };
-		E8DEFDE020F372490075E7FC /* libavfilter.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E8DEFDD920F372490075E7FC /* libavfilter.a */; };
-		E8DEFDE120F372490075E7FC /* libswscale.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E8DEFDDA20F372490075E7FC /* libswscale.a */; };
 		E8DEFDE320F373230075E7FC /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E8DEFDE220F373230075E7FC /* libz.tbd */; };
 		E8DEFDE520F373740075E7FC /* libbz2.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E8DEFDE420F373740075E7FC /* libbz2.tbd */; };
 		E8DEFDE720F3743C0075E7FC /* VideoDecodeAcceleration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E8DEFDE620F3743C0075E7FC /* VideoDecodeAcceleration.framework */; };
@@ -63,6 +63,14 @@
 		E850B7C31F46F02000AC4A1D /* StreamingPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StreamingPlayerViewController.swift; sourceTree = "<group>"; };
 		E850B7C71F46F12E00AC4A1D /* MainWindowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		E8669604216C9B4F0065AD53 /* libevent.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libevent.a; path = ../../../Api/WS_macOS/library/corelib/AGORA/libevent.a; sourceTree = "<group>"; };
+		E86ADA3C22C61C95005917AF /* TTTRtcEngineKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TTTRtcEngineKit.framework; path = ../TTTRtcEngineKit/TTTRtcEngineKit.framework; sourceTree = "<group>"; };
+		E86ADA3E22C61DDC005917AF /* libavcodec.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavcodec.a; path = ../TTTRtcEngineKit/ffmpeg/libavcodec.a; sourceTree = "<group>"; };
+		E86ADA3F22C61DDC005917AF /* libswresample.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libswresample.a; path = ../TTTRtcEngineKit/ffmpeg/libswresample.a; sourceTree = "<group>"; };
+		E86ADA4022C61DDC005917AF /* libavformat.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavformat.a; path = ../TTTRtcEngineKit/ffmpeg/libavformat.a; sourceTree = "<group>"; };
+		E86ADA4122C61DDC005917AF /* libavfilter.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavfilter.a; path = ../TTTRtcEngineKit/ffmpeg/libavfilter.a; sourceTree = "<group>"; };
+		E86ADA4222C61DDC005917AF /* libswscale.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libswscale.a; path = ../TTTRtcEngineKit/ffmpeg/libswscale.a; sourceTree = "<group>"; };
+		E86ADA4322C61DDC005917AF /* libavutil.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavutil.a; path = ../TTTRtcEngineKit/ffmpeg/libavutil.a; sourceTree = "<group>"; };
+		E86ADA4422C61DDC005917AF /* libavdevice.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libavdevice.a; path = ../TTTRtcEngineKit/ffmpeg/libavdevice.a; sourceTree = "<group>"; };
 		E892109922A7DB3800B5B1C6 /* ProgressHUD.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProgressHUD.swift; sourceTree = "<group>"; };
 		E899005520F2246C0041EF73 /* TTTRtcEngineKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = TTTRtcEngineKit.framework; path = ../../../Api/macFrameworks/TTTRtcEngineKit/TTTRtcEngineKit.framework; sourceTree = "<group>"; };
 		E899005720F245000041EF73 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
@@ -94,22 +102,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E86ADA4522C61DDC005917AF /* libavcodec.a in Frameworks */,
+				E86ADA4622C61DDC005917AF /* libswresample.a in Frameworks */,
+				E86ADA4722C61DDC005917AF /* libavformat.a in Frameworks */,
+				E86ADA4822C61DDC005917AF /* libavfilter.a in Frameworks */,
+				E86ADA4922C61DDC005917AF /* libswscale.a in Frameworks */,
+				E86ADA4A22C61DDC005917AF /* libavutil.a in Frameworks */,
+				E86ADA4B22C61DDC005917AF /* libavdevice.a in Frameworks */,
+				E86ADA3D22C61C95005917AF /* TTTRtcEngineKit.framework in Frameworks */,
 				E8DEFDE720F3743C0075E7FC /* VideoDecodeAcceleration.framework in Frameworks */,
+				E899006120F33DEA0041EF73 /* SystemConfiguration.framework in Frameworks */,
 				E8DEFDE520F373740075E7FC /* libbz2.tbd in Frameworks */,
 				E8DEFDE320F373230075E7FC /* libz.tbd in Frameworks */,
-				E8DEFDDB20F372490075E7FC /* libavdevice.a in Frameworks */,
-				E8DEFDDC20F372490075E7FC /* libavcodec.a in Frameworks */,
-				E8DEFDDD20F372490075E7FC /* libavformat.a in Frameworks */,
-				E8DEFDDE20F372490075E7FC /* libavutil.a in Frameworks */,
-				E8DEFDDF20F372490075E7FC /* libswresample.a in Frameworks */,
-				E8DEFDE020F372490075E7FC /* libavfilter.a in Frameworks */,
-				E8DEFDE120F372490075E7FC /* libswscale.a in Frameworks */,
 				E899006320F33E620041EF73 /* libresolv.tbd in Frameworks */,
-				E899006120F33DEA0041EF73 /* SystemConfiguration.framework in Frameworks */,
 				E899005F20F30C720041EF73 /* libiconv.2.tbd in Frameworks */,
 				E899005D20F30C3F0041EF73 /* libxml2.tbd in Frameworks */,
 				E899005B20F30C2C0041EF73 /* libc++.tbd in Frameworks */,
-				E899005620F2246C0041EF73 /* TTTRtcEngineKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -173,6 +181,14 @@
 		E899005420F2246C0041EF73 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E86ADA3E22C61DDC005917AF /* libavcodec.a */,
+				E86ADA4422C61DDC005917AF /* libavdevice.a */,
+				E86ADA4122C61DDC005917AF /* libavfilter.a */,
+				E86ADA4022C61DDC005917AF /* libavformat.a */,
+				E86ADA4322C61DDC005917AF /* libavutil.a */,
+				E86ADA3F22C61DDC005917AF /* libswresample.a */,
+				E86ADA4222C61DDC005917AF /* libswscale.a */,
+				E86ADA3C22C61C95005917AF /* TTTRtcEngineKit.framework */,
 				E8669604216C9B4F0065AD53 /* libevent.a */,
 				E8EE6BF521392F8B007B1E30 /* libproc.tbd */,
 				E8DEFDE620F3743C0075E7FC /* VideoDecodeAcceleration.framework */,
@@ -430,10 +446,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 7XP66VHL84;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../../../Api/macFrameworks/TTTRtcEngineKit";
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../TTTRtcEngineKit";
 				INFOPLIST_FILE = "$(SRCROOT)/TTTRtcEngineDemo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../../../Api/macFrameworks/player/ffmpeg";
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../TTTRtcEngineKit/ffmpeg";
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.3ttech.TTTRtcEngineDemo;
@@ -453,10 +469,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 7XP66VHL84;
-				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../../../Api/macFrameworks/TTTRtcEngineKit";
+				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../TTTRtcEngineKit";
 				INFOPLIST_FILE = "$(SRCROOT)/TTTRtcEngineDemo/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
-				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../../../Api/macFrameworks/player/ffmpeg";
+				LIBRARY_SEARCH_PATHS = "$(SRCROOT)/../TTTRtcEngineKit/ffmpeg";
 				OTHER_LDFLAGS = "";
 				PRODUCT_BUNDLE_IDENTIFIER = com.3ttech.TTTRtcEngineDemo;
 				PRODUCT_NAME = "$(TARGET_NAME)";

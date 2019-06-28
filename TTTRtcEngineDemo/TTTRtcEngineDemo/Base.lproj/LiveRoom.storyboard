@@ -192,7 +192,7 @@
                                                     </connections>
                                                 </button>
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="qev-oK-2Fc">
-                                                    <rect key="frame" x="38" y="230" width="329" height="17"/>
+                                                    <rect key="frame" x="38" y="229" width="329" height="17"/>
                                                     <textFieldCell key="cell" lineBreakMode="clipping" id="U3a-bh-fBp">
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>

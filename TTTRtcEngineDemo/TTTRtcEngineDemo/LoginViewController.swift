@@ -69,7 +69,7 @@ class LoginViewController: NSViewController {
             }
         }
         
-        let appID = "test900572e02867fab8131651339518"
+        let appID: String = <#Your App Id#>
         if app.rtcEngine == nil {
             app.rtcEngine = TTTRtcEngineKit.sharedEngine(withAppId: appID, delegate: self)
         } else {
