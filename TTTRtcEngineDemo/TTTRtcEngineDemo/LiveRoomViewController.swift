@@ -18,6 +18,15 @@ class LiveRoomViewController: NSViewController {
     @IBOutlet weak var userVideoContainer4: UserVideoContainer!
     @IBOutlet weak var userVideoContainer5: UserVideoContainer!
     @IBOutlet weak var userVideoContainer6: UserVideoContainer!
+    @IBOutlet weak var userVideoContainer7: UserVideoContainer!
+    @IBOutlet weak var userVideoContainer8: UserVideoContainer!
+    @IBOutlet weak var userVideoContainer9: UserVideoContainer!
+    @IBOutlet weak var userVideoContainer10: UserVideoContainer!
+    @IBOutlet weak var userVideoContainer11: UserVideoContainer!
+    @IBOutlet weak var userVideoContainer12: UserVideoContainer!
+    @IBOutlet weak var userVideoContainer13: UserVideoContainer!
+    @IBOutlet weak var userVideoContainer14: UserVideoContainer!
+    @IBOutlet weak var userVideoContainer15: UserVideoContainer!
     @IBOutlet weak var tabViewMusic: NSTabView!
     @IBOutlet weak var buttonSelectAudioFileName: NSButton!
     @IBOutlet weak var labelAudioFileName: NSTextField!
@@ -27,6 +36,10 @@ class LiveRoomViewController: NSViewController {
     @IBOutlet weak var buttonPauseResumeAudioMixing: NSButton!
     @IBOutlet weak var buttonStopAudioMixing: NSButton!
     @IBOutlet weak var buttonOnlyLocalHear: NSButton!
+    @IBOutlet weak var labelSoloVolume: NSTextField!
+    @IBOutlet weak var labelFileVolume: NSTextField!
+    @IBOutlet weak var levelIndicatorSoloVolume: NSLevelIndicator!
+    @IBOutlet weak var levelIndicatorFileVolume: NSLevelIndicator!
     @IBOutlet weak var buttonPlaySoundEffect1: NSButton!
     @IBOutlet weak var buttonStopSoundEffect1: NSButton!
     @IBOutlet weak var buttonPlaySoundEffect2: NSButton!
@@ -35,6 +48,10 @@ class LiveRoomViewController: NSViewController {
     @IBOutlet weak var buttonStopAllSoundEffects: NSButton!
     @IBOutlet weak var stackViewSoundEffect1: NSStackView!
     @IBOutlet weak var stackViewSoundEffect2: NSStackView!
+    @IBOutlet weak var labelWaterMarkX: NSTextField!
+    @IBOutlet weak var labelWaterMarkY: NSTextField!
+    @IBOutlet weak var stepperWaterMarkX: NSStepper!
+    @IBOutlet weak var stepperWaterMarkY: NSStepper!
     
     private var userVideoContainers: [UserVideoContainer]!
     private var userVideoControls: [UserVideoControl]!
@@ -54,8 +71,17 @@ class LiveRoomViewController: NSViewController {
         switch app.userMe!.clientRole {
         case .clientRole_Anchor:
             app.videoCompositingLayout = TTTRtcVideoCompositingLayout()
-            app.videoCompositingLayout!.canvasWidth = 360
-            app.videoCompositingLayout!.canvasHeight = 640
+            switch app.videoProfile {
+            case ._VideoProfile_480P:
+                app.videoCompositingLayout!.canvasWidth = 848
+                app.videoCompositingLayout!.canvasHeight = 480
+            case ._VideoProfile_720P:
+                app.videoCompositingLayout!.canvasWidth = 1280
+                app.videoCompositingLayout!.canvasHeight = 720
+            default:
+                app.videoCompositingLayout!.canvasWidth = 640
+                app.videoCompositingLayout!.canvasHeight = 360
+            }
             app.videoCompositingLayout!.backgroundColor = "#e8e6e8"
         case .clientRole_Broadcaster:
             app.videoCompositingLayout = nil
@@ -65,22 +91,30 @@ class LiveRoomViewController: NSViewController {
         
         userVideoContainers = [UserVideoContainer]()
         userVideoContainerHuge.isHuge = true
-//        userVideoContainerHuge.imageView.image = UIImage(named: "morentouxiang")
         userVideoContainers.append(userVideoContainerHuge)
+        userVideoContainers.append(userVideoContainer13)
+        userVideoContainers.append(userVideoContainer14)
+        userVideoContainers.append(userVideoContainer15)
+        userVideoContainers.append(userVideoContainer10)
+        userVideoContainers.append(userVideoContainer11)
+        userVideoContainers.append(userVideoContainer12)
+        userVideoContainers.append(userVideoContainer7)
+        userVideoContainers.append(userVideoContainer8)
+        userVideoContainers.append(userVideoContainer9)
         userVideoContainers.append(userVideoContainer4)
         userVideoContainers.append(userVideoContainer5)
         userVideoContainers.append(userVideoContainer6)
         userVideoContainers.append(userVideoContainer1)
         userVideoContainers.append(userVideoContainer2)
         userVideoContainers.append(userVideoContainer3)
-        
+
         userVideoControls = [UserVideoControl]()
         for userVideoContainer in userVideoContainers {
             userVideoControls.append(userVideoContainer.userVideoControl)
 //            userVideoContainer.userVideoControl.delegate = self
         }
         
-        if app.userMe!.isAnchor {
+//        if app.userMe!.isAnchor {
 //            anchorIDLabel.text = "\(app.userMe!.userID)"
 //            sendStatsView.isHidden = !showStatsInfo
 //            receivedStatsView.isHidden = true
@@ -92,12 +126,14 @@ class LiveRoomViewController: NSViewController {
 //            myVideoControl = userVideoContainerHuge.userVideoControl
 //            myVideoControl!.initWith(user: app.userMe!, viewRenderMode: .render_Adaptive)
             
-            userVideoContainerHuge.userVideoControl.initWith(user: app.userMe!, viewRenderMode: .render_Fit)
+            userVideoContainerHuge.userVideoControl.initWith(user: app.userMe!, deviceID: app.rtcEngine.defaultVideoDeviceID, viewRenderMode: .render_Fit)
             app.rtcEngine.startPreview()
-
-        }
+//        }
         
         //tabViewMusic.selectLastTabViewItem(nil)
+        levelIndicatorSoloVolume.intValue = 10
+        levelIndicatorFileVolume.intValue = 10
+        
         refreshSoundEffectButtons()
     }
     
@@ -114,10 +150,14 @@ class LiveRoomViewController: NSViewController {
         openPanel.allowedFileTypes = ["mp3"]
         openPanel.beginSheetModal(for: self.view.window!) { (response: NSApplication.ModalResponse) in
             if response == .OK {
-                let urlString = openPanel.url!.absoluteString.removingPercentEncoding!
-                self.labelAudioFileName.stringValue = urlString
+                //let urlString = openPanel.url!.absoluteString.removingPercentEncoding!
+                self.labelAudioFileName.toolTip = /*urlString*/openPanel.url!.path
+                self.labelAudioFileName.stringValue = openPanel.url!.lastPathComponent
                 self.audioMixingStatus = 0
                 self.refreshAudioMixingButtonStatus()
+                
+                self.levelIndicatorSoloVolume.intValue = 10
+                self.levelIndicatorFileVolume.intValue = 10
             }
         }
     }
@@ -129,7 +169,7 @@ class LiveRoomViewController: NSViewController {
             buttonSelectAudioFileName.isEnabled = false
             sliderAudioMixing.isEnabled = true
             let isOnlyLocalHear = (buttonOnlyLocalHear.state == .on)
-            app.rtcEngine.startAudioMixing(labelAudioFileName.stringValue, loopback: isOnlyLocalHear, cycle: 1);
+            app.rtcEngine.startAudioMixing(labelAudioFileName.toolTip, loopback: isOnlyLocalHear, cycle: 1);
         }
     }
     
@@ -173,18 +213,30 @@ class LiveRoomViewController: NSViewController {
             buttonPauseResumeAudioMixing.isEnabled = false
             buttonPauseResumeAudioMixing.title = "暂停播放"
             buttonStopAudioMixing.isEnabled = false
+            labelSoloVolume.stringValue = ""
+            levelIndicatorSoloVolume.isEnabled = false
+            labelFileVolume.stringValue = ""
+            levelIndicatorFileVolume.isEnabled = false
         case 1:
             buttonOnlyLocalHear.isEnabled = false
             buttonStartAudioMixing.isEnabled = false
             buttonPauseResumeAudioMixing.isEnabled = true
             buttonPauseResumeAudioMixing.title = "暂停播放"
             buttonStopAudioMixing.isEnabled = true
+            labelSoloVolume.stringValue = labelSoloVolume.placeholderString ?? ""
+            levelIndicatorSoloVolume.isEnabled = true
+            labelFileVolume.stringValue = labelFileVolume.placeholderString ?? ""
+            levelIndicatorFileVolume.isEnabled = true
         case 2:
             buttonOnlyLocalHear.isEnabled = false
             buttonStartAudioMixing.isEnabled = false
             buttonPauseResumeAudioMixing.isEnabled = true
             buttonPauseResumeAudioMixing.title = "恢复播放"
             buttonStopAudioMixing.isEnabled = true
+            labelSoloVolume.stringValue = ""
+            levelIndicatorSoloVolume.isEnabled = false
+            labelFileVolume.stringValue = ""
+            levelIndicatorFileVolume.isEnabled = false
         default: // -1
             break
         }
@@ -201,7 +253,7 @@ class LiveRoomViewController: NSViewController {
         app.rtcEngine.setAudioMixingPosition(sliderAudioMixing!.integerValue)
     }
     
-    func getAvailableUserVideoControlButHuge() -> UserVideoControl? {
+    func getAvailableUserVideoControl() -> UserVideoControl? {
         for userVideoControl in userVideoControls {
             if !userVideoControl.container.isHuge && userVideoControl.user == nil {
                 return userVideoControl
@@ -210,13 +262,23 @@ class LiveRoomViewController: NSViewController {
         return nil
     }
     
-    func getUserVideoControlWithUser(_ user: TTTUser) -> UserVideoControl? {
+    func getUserVideoControlWithDeviceID(_ deviceID: String) -> UserVideoControl? {
         for userVideoControl in userVideoControls {
-            if userVideoControl.user != nil && userVideoControl.user == user {
+            if userVideoControl.deviceID == deviceID {
                 return userVideoControl
             }
         }
         return nil
+    }
+    
+    func getUserVideoControlWithUser(_ aUser: TTTUser) -> [UserVideoControl] {
+        var theUserVideoControls: [UserVideoControl] = []
+        for userVideoControl in userVideoControls {
+            if userVideoControl.user != nil && userVideoControl.user == aUser {
+                theUserVideoControls.append(userVideoControl)
+            }
+        }
+        return theUserVideoControls
     }
     
     func getUserVideoControlWithPosition(_ position: UserVideoControlPosition) -> UserVideoControl? {
@@ -231,7 +293,7 @@ class LiveRoomViewController: NSViewController {
     func refreshVideoCompositingLayout() -> Void {
         app.videoCompositingLayout!.regions.removeAllObjects()
         for userVideoControl in userVideoControls {
-            if userVideoControl.user == nil {
+            if /*userVideoControl.user == nil*/ userVideoControl.deviceID == "" {
                 continue
             }
             let theRegion = TTTRtcVideoCompositingRegion()
@@ -246,6 +308,13 @@ class LiveRoomViewController: NSViewController {
             app.videoCompositingLayout!.regions.add(theRegion)
         }
         app.rtcEngine.setVideoCompositingLayout(app.videoCompositingLayout)
+    }
+    
+    @IBAction func copyUrlToClipboard(_ sender: Any) {
+        //NSPasteboard.general.clearContents()
+        NSPasteboard.general.declareTypes([.string], owner: nil)
+        NSPasteboard.general.setString(textFieldRtmpUrl.stringValue, forType: .string)
+        ProgressHUD.showInfoWithStatus("拉流地址已复制到剪贴板")
     }
     
     @IBAction func playPauseSoundEffect_1(_ sender: NSButton) {
@@ -421,6 +490,45 @@ class LiveRoomViewController: NSViewController {
         app.liveRoomWindowController?.close()
         app.liveRoomWindowController = nil
     }
+    
+    @IBAction func levelIndicatorSoloVolumeAction(_ sender: Any) {
+        let scale: Int = levelIndicatorSoloVolume.integerValue * 10
+        app.rtcEngine.adjustAudioMixingSoloVolume(scale)
+    }
+    
+    @IBAction func levelIndicatorFileVolumeAction(_ sender: Any) {
+        let scale: Int = levelIndicatorFileVolume.integerValue * 10
+        app.rtcEngine.adjustAudioMixingPlayoutVolume(UInt(scale))
+    }
+    
+    func setVideoWatermark() -> Void {
+        if let imagePath = Bundle.main.path(forResource: "3ttech", ofType: "png") {
+            let imageURL = URL(fileURLWithPath: imagePath)
+            let imageWidth = 128
+            let imageHeight = 128
+            let imageX = stepperWaterMarkX.integerValue
+            let imageY = stepperWaterMarkY.integerValue
+            app.rtcEngine.addVideoWatermark(imageURL, rect: CGRect(x: imageX, y: imageY, width: imageWidth, height: imageHeight))
+        }
+    }
+    
+    @IBAction func setWaterMarkView(_ sender: NSButton) {
+        if sender.state == .on {
+            stepperWaterMarkX.isEnabled = true
+            stepperWaterMarkY.isEnabled = true
+            setVideoWatermark()
+        } else {
+            stepperWaterMarkX.isEnabled = false
+            stepperWaterMarkY.isEnabled = false
+            app.rtcEngine.clearVideoWatermarks()
+        }
+    }
+    
+    @IBAction func adjustWaterMarkPosition(_ sender: NSStepper) {
+        labelWaterMarkX.stringValue = "\(stepperWaterMarkX.integerValue)"
+        labelWaterMarkY.stringValue = "\(stepperWaterMarkY.integerValue)"
+        setVideoWatermark()
+    }
 }
 
 extension LiveRoomViewController: TTTRtcEngineDelegate {
@@ -480,7 +588,7 @@ extension LiveRoomViewController: TTTRtcEngineDelegate {
     }
     
     func rtcEngine(_ engine: TTTRtcEngineKit!, didJoinedOfUid uid: Int64, clientRole: TTTRtcClientRole, isVideoEnabled: Bool, elapsed: Int) {
-        if app.userMe!.isAnchor && app.userArray.count >= 7 {
+        if app.userMe!.isAnchor && app.userArray.count > 16 {
             app.rtcEngine.kickChannelUser(uid)
             return
         }
@@ -501,22 +609,6 @@ extension LiveRoomViewController: TTTRtcEngineDelegate {
 //            app.audienceCount += 1
 //        }
 //        NotificationCenter.default.post(name: NSNotification.Name("RefreshSettingView"), object: nil)
-        
-        if app.channelProfile == .channelProfile_LiveBroadcasting {
-            if app.userMe!.isAnchor {
-                if !remoteUser.isAudience && getUserVideoControlWithUser(remoteUser) == nil {
-                    if let remoteControl = getAvailableUserVideoControlButHuge() {
-                        remoteControl.initWith(user: remoteUser, viewRenderMode: .render_Fit)
-                        remoteControl.showButtonsBox(true)
-                    }
-                }
-                refreshVideoCompositingLayout()
-            }
-            else if remoteUser.isAnchor {
-                userVideoContainerHuge.userVideoControl.initWith(user: remoteUser, viewRenderMode: .render_Fit)
-            }
-            
-        }
     }
     
     func rtcEngine(_ engine: TTTRtcEngineKit!, didOfflineOfUid uid: Int64, reason: TTTRtcUserOfflineReason) {
@@ -524,9 +616,16 @@ extension LiveRoomViewController: TTTRtcEngineDelegate {
             return
         }
         
-        if let theControl = getUserVideoControlWithUser(theUser) {
+        let theControls = self.getUserVideoControlWithUser(theUser)
+        for theControl in theControls {
             theControl.showButtonsBox(false)
             theControl.closeVideoDevice()
+        }
+        
+        if app.channelProfile == .channelProfile_LiveBroadcasting {
+            if app.userMe!.isAnchor {
+                refreshVideoCompositingLayout()
+            }
         }
         
         if let userIndex = app.userArray.firstIndex(of: theUser) {
@@ -534,30 +633,46 @@ extension LiveRoomViewController: TTTRtcEngineDelegate {
         }
     }
     
+    func rtcEngine(_ engine: TTTRtcEngineKit!, didVideoEnabled enabled: Bool, deviceId devId: String!, byUid uid: Int64) {
+        guard let theUser = app.user(userID: uid) else {
+            return
+        }
+        
+        if let theControl = getUserVideoControlWithDeviceID(devId) {
+            theControl.enableVideo(enabled)
+            if app.userMe!.isAnchor {
+                theControl.showButtonsBox(true)
+            }
+        } else {
+            if let remoteControl = getAvailableUserVideoControl() {
+                remoteControl.initWith(user: theUser, deviceID: devId, viewRenderMode: .render_Fit)
+                if enabled {
+                    if app.userMe!.isAnchor {
+                        remoteControl.showButtonsBox(true)
+                    }
+                }
+            }
+        }
+        
+        if app.channelProfile == .channelProfile_LiveBroadcasting {
+            if app.userMe!.isAnchor {
+                refreshVideoCompositingLayout()
+            }
+        }
+    }
+    
     func rtcEngine(_ engine: TTTRtcEngineKit!, localAudioStats stats: TTTRtcLocalAudioStats!) {
         DispatchQueue.main.async {
-            if let localControl = self.getUserVideoControlWithUser(app.userMe!) {
-//                if localControl.container.isHuge {
-//                    self.labelAudioSend.stringValue = "\(stats.sentBitrate)"
-//                    //self.audioReceivedLabel.text = "\(stats.receivedBitrate)"
-//                }
-//                else {
-                    localControl.setLocalAudioStats(stats)
-//                }
+            if let localControl = self.getUserVideoControlWithDeviceID(app.rtcEngine.defaultVideoDeviceID) {
+                localControl.setLocalAudioStats(stats)
             }
         }
     }
     
     func rtcEngine(_ engine: TTTRtcEngineKit!, localVideoStats stats: TTTRtcLocalVideoStats!) {
         DispatchQueue.main.async {
-            if let localControl = self.getUserVideoControlWithUser(app.userMe!) {
-//                if localControl.container.isHuge {
-//                    self.labelVideoSend.stringValue = "\(stats.sentBitrate)"
-//                    self.videoReceivedLabel.text = "\(stats.receivedBitrate)"
-//                }
-//                else {
-                    localControl.setLocalVideoStats(stats)
-//                }
+            if let localControl = self.getUserVideoControlWithDeviceID(app.rtcEngine.defaultVideoDeviceID) {
+                localControl.setLocalVideoStats(stats)
             }
         }
     }
@@ -565,7 +680,8 @@ extension LiveRoomViewController: TTTRtcEngineDelegate {
     func rtcEngine(_ engine: TTTRtcEngineKit!, remoteAudioStats stats: TTTRtcRemoteAudioStats!) {
         DispatchQueue.main.async {
             if let remoteUser = app.user(userID: Int64(stats.uid)) {
-                if let remoteControl = self.getUserVideoControlWithUser(remoteUser) {
+                let remoteControls = self.getUserVideoControlWithUser(remoteUser)
+                for remoteControl in remoteControls {
                     remoteControl.setRemoteAudioStats(stats)
                 }
             }
@@ -574,10 +690,8 @@ extension LiveRoomViewController: TTTRtcEngineDelegate {
     
     func rtcEngine(_ engine: TTTRtcEngineKit!, remoteVideoStats stats: TTTRtcRemoteVideoStats!) {
         DispatchQueue.main.async {
-            if let remoteUser = app.user(userID: Int64(stats.uid)) {
-                if let remoteControl = self.getUserVideoControlWithUser(remoteUser) {
-                    remoteControl.setRemoteVideoStats(stats)
-                }
+            if let remoteControl = self.getUserVideoControlWithDeviceID(stats.deviceId) {
+                remoteControl.setRemoteVideoStats(stats)
             }
         }
     }
@@ -585,7 +699,8 @@ extension LiveRoomViewController: TTTRtcEngineDelegate {
     func rtcEngine(_ engine: TTTRtcEngineKit!, reportAudioLevel userID: Int64, audioLevel: UInt, audioLevelFullRange: UInt) {
         DispatchQueue.main.async {
             if let theUser = app.user(userID: userID) {
-                if let theControl = self.getUserVideoControlWithUser(theUser) {
+                let theControls = self.getUserVideoControlWithUser(theUser)
+                for theControl in theControls {
                     theControl.setAudioLevel(audioLevel)
                 }
             }
@@ -593,6 +708,7 @@ extension LiveRoomViewController: TTTRtcEngineDelegate {
     }
     
     func rtcEngine(_ engine: TTTRtcEngineKit!, onSetVideoCompositingLayout layout: TTTRtcVideoCompositingLayout!) {
+        /*
         if app.userMe!.isAnchor {
             return
         }
@@ -602,18 +718,18 @@ extension LiveRoomViewController: TTTRtcEngineDelegate {
                 continue
             }
             
-            if theUser.isAnchor {
+            if theUser.isAnchor && userVideoContainerHuge.userVideoControl.user == nil {
+                userVideoContainerHuge.userVideoControl.initWith(user: theUser, deviceID: region.deviceId, viewRenderMode: .render_Fit)
                 continue
             }
             
-            if getUserVideoControlWithUser(theUser) != nil {
+            if getUserVideoControlWithDeviceID(region.deviceId) != nil {
                 continue
             }
             
             let position = UserVideoControlPosition(x: region.x, y: region.y, width: region.width, height: region.height)
             if let theControl = getUserVideoControlWithPosition(position) {
-                //theControl.initWith(user: theUser, viewRenderMode: .render_Adaptive)
-                theControl.initWith(user: theUser, viewRenderMode: .render_Fit)
+                theControl.initWith(user: theUser, deviceID: region.deviceId, viewRenderMode: .render_Fit)
                 
                 if theUser.isMe {
 //                    myVideoControl = theControl
@@ -627,6 +743,7 @@ extension LiveRoomViewController: TTTRtcEngineDelegate {
 //                theControl.initWith(user: theUser, viewRenderMode: .render_Adaptive)
 //            }
         }
+        */
     }
     
     func rtcEngine(_ engine: TTTRtcEngineKit!, localAudioData data: UnsafeMutablePointer<Int8>!, dataSize size: UInt, sampleRate: UInt,
@@ -682,6 +799,10 @@ extension LiveRoomViewController: TTTRtcEngineDelegate {
 //        textViewOutput.string.append("\(dateFormatter.string(from: thisTime))  SendData: \(sendDataCount)\n")
 //        textViewOutput.scrollLineDown(nil)
 //    }
+    
+    func rtcEngine(_ engine: TTTRtcEngineKit!, didAudioRouteChanged routing: TTTRtcAudioOutputRouting) {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "AudioRouteChanged"), object: nil)
+    }
 }
 
 extension LiveRoomViewController: NSTabViewDelegate {

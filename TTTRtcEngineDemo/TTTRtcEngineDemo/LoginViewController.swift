@@ -21,14 +21,16 @@ class LoginViewController: NSViewController {
     @IBOutlet weak var comboBoxMicrophone: NSComboBox!
     @IBOutlet weak var comboBoxSpeaker: NSComboBox!
     @IBOutlet weak var comboBoxVideoProfile: NSComboBox!
+    @IBOutlet weak var textFieldFrameRate: NSTextField!
+    @IBOutlet weak var textFieldBitRate: NSTextField!
     @IBOutlet weak var buttonEnterRoom: NSButton!
     @IBOutlet weak var buttonExitApp: NSButton!
     
     private var roleButtons: [NSButton]!
     private var clientRole: TTTRtcClientRole!
     private var videoCaptureDevices: [AVCaptureDevice]!
-    private var audioCaptureDevices: [AVCaptureDevice]!
-    private var audioPlayoutDevices: [[NSNumber : String]]!
+    private var audioCaptureDevices: [TTTRtcAudioDevice]!
+    private var audioPlayoutDevices: [TTTRtcAudioDevice]!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -69,7 +71,7 @@ class LoginViewController: NSViewController {
             }
         }
         
-        let appID: String = <#Your App Id#>
+        let appID = "test900572e02867fab8131651339518"
         if app.rtcEngine == nil {
             app.rtcEngine = TTTRtcEngineKit.sharedEngine(withAppId: appID, delegate: self)
         } else {
@@ -83,41 +85,71 @@ class LoginViewController: NSViewController {
         for videoCaptureDevice in videoCaptureDevices {
             comboBoxCamera.addItem(withObjectValue: videoCaptureDevice.localizedName)
         }
-        comboBoxCamera.selectItem(at: 0)
+        if comboBoxCamera.numberOfItems > 0 {
+            comboBoxCamera.selectItem(at: 0)
+        }
         
         // 麦克风
         audioCaptureDevices = app.rtcEngine.audioCaptureDevices()
         comboBoxMicrophone.removeAllItems()
         for audioCaptureDevice in audioCaptureDevices {
-            comboBoxMicrophone.addItem(withObjectValue: audioCaptureDevice.localizedName)
+            if audioCaptureDevice.deviceType == .audioDevice_Input_ExternalMicrophone {
+                comboBoxMicrophone.addItem(withObjectValue: audioCaptureDevice.deviceName!/* + "[外置麦克风]"*/)
+            } else {
+                comboBoxMicrophone.addItem(withObjectValue: audioCaptureDevice.deviceName!/* + "[内置麦克风]"*/)
+            }
         }
-        comboBoxMicrophone.selectItem(at: 0)
+        if comboBoxMicrophone.numberOfItems > 0 {
+            comboBoxMicrophone.selectItem(at: 0)
+        }
 
         // 扬声器
-        audioPlayoutDevices = app.rtcEngine.audioPlayoutDevices()
-        comboBoxSpeaker.removeAllItems()
-        for audioPlayoutDevice in audioPlayoutDevices {
-            comboBoxSpeaker.addItem(withObjectValue: audioPlayoutDevice.first!.value)
-        }
-        comboBoxSpeaker.selectItem(at: 0)
+        fillAudioPlayoutDevices()
         
         // 采集分辨率
-        comboBoxVideoProfile.removeAllItems()
-        comboBoxVideoProfile.addItem(withObjectValue: "360P（640x360）")
-        comboBoxVideoProfile.addItem(withObjectValue: "480P（854x480）")
-        comboBoxVideoProfile.addItem(withObjectValue: "720P（1280x720）")
-        let videoProfileValue = UserDefaults.standard.integer(forKey: "EnterVideoProfile")
-        if let videoProfileIndex = [30, 40, 50].firstIndex(of: videoProfileValue) {
-            comboBoxVideoProfile.selectItem(at: videoProfileIndex)
-        } else {
-            comboBoxVideoProfile.selectItem(at: 0)
-        }
-        
+        //refreshVideoProfiles(videoCaptureDevice: videoCaptureDevices[comboBoxCamera.indexOfSelectedItem])
+
+        // ProgressHUD
         ProgressHUD.setDefaultStyle(.light)
         ProgressHUD.setDefaultMaskType(.none)
         ProgressHUD.setDefaultPosition(.center)
         ProgressHUD.setDismissable(false)
         ProgressHUD.setContainerView(self.view)
+    }
+    
+    func fillAudioPlayoutDevices() -> Void {
+        audioPlayoutDevices = app.rtcEngine.audioPlayoutDevices()
+        comboBoxSpeaker.removeAllItems()
+        for audioPlayoutDevice in audioPlayoutDevices {
+            if audioPlayoutDevice.deviceType == .audioDevice_Output_ExternalSpeaker {
+                comboBoxSpeaker.addItem(withObjectValue: audioPlayoutDevice.deviceName!/* + "[外置扬声器]"*/)
+            } else if audioPlayoutDevice.deviceType == .audioDevice_Output_Headphones {
+                comboBoxSpeaker.addItem(withObjectValue: audioPlayoutDevice.deviceName! + "[耳机]")
+            }
+            else {
+                comboBoxSpeaker.addItem(withObjectValue: audioPlayoutDevice.deviceName!/* + "[内置扬声器]"*/)
+            }
+        }
+        if comboBoxSpeaker.numberOfItems > 0 {
+            comboBoxSpeaker.selectItem(at: 0)
+        }
+    }
+    
+    func refreshVideoProfiles(videoCaptureDevice: AVCaptureDevice) -> Void {
+        comboBoxVideoProfile.removeAllItems()
+        if videoCaptureDevice.supportsSessionPreset(AVCaptureSession.Preset.hd1280x720) {
+            comboBoxVideoProfile.insertItem(withObjectValue: "720P（1280x720）", at: 0)
+        }
+        if videoCaptureDevice.supportsSessionPreset(AVCaptureSession.Preset.qHD960x540) {
+            comboBoxVideoProfile.insertItem(withObjectValue: "480P（848x480）", at: 0)
+        }
+        if videoCaptureDevice.supportsSessionPreset(AVCaptureSession.Preset.vga640x480) {
+            comboBoxVideoProfile.insertItem(withObjectValue: "360P（640x360）", at: 0)
+        }
+        //let videoProfileValue = UserDefaults.standard.integer(forKey: "EnterVideoProfile")
+        if comboBoxVideoProfile.numberOfItems > 0 {
+            comboBoxVideoProfile.selectItem(at: 0)
+        }
     }
     
     @IBAction func enterRoom(_ sender: Any) {
@@ -162,17 +194,24 @@ class LoginViewController: NSViewController {
         app.rtcEngine.setClientRole(clientRole)
         app.rtcEngine.enableVideo()
         app.rtcEngine.audioCaptureDevice = audioCaptureDevices[comboBoxMicrophone.indexOfSelectedItem]
+        app.rtcEngine.audioPlayoutDevice = audioPlayoutDevices[comboBoxSpeaker.indexOfSelectedItem]
         app.rtcEngine.videoCaptureDevice = videoCaptureDevices[comboBoxCamera.indexOfSelectedItem]
-        var videoProfile: TTTRtcVideoProfile;
+        var videoSize: CGSize
         switch comboBoxVideoProfile.indexOfSelectedItem {
         case 1:
-            videoProfile = ._VideoProfile_480P
+            app.videoProfile = ._VideoProfile_480P
+            videoSize = CGSize(width: 848, height: 480)
         case 2:
-            videoProfile = ._VideoProfile_720P
+            app.videoProfile = ._VideoProfile_720P
+            videoSize = CGSize(width: 1280, height: 720)
         default:
-            videoProfile = ._VideoProfile_360P
+            app.videoProfile = ._VideoProfile_360P
+            videoSize = CGSize(width: 640, height: 360)
         }
-        app.rtcEngine.setVideoProfile(videoProfile, swapWidthAndHeight: false)
+        //app.rtcEngine.setVideoProfile(app.videoProfile, swapWidthAndHeight: false)
+        let frameRate: UInt = UInt(textFieldFrameRate.intValue)
+        let bitRate: UInt = UInt(textFieldBitRate.intValue)
+        app.rtcEngine.setVideoProfile(videoSize, frameRate: frameRate, bitRate: bitRate)
 
         if clientRole == .clientRole_Anchor {
             let configBuilder = TTTPublisherConfigurationBuilder()
@@ -196,7 +235,7 @@ class LoginViewController: NSViewController {
         UserDefaults.standard.set(textFieldSessionID.stringValue, forKey: "EnterSessionID")
         UserDefaults.standard.set(textFieldUserID.stringValue,    forKey: "EnterUserID")
         UserDefaults.standard.set(clientRole.rawValue,            forKey: "EnterClientRole")
-        UserDefaults.standard.set(videoProfile.rawValue,          forKey: "EnterVideoProfile")
+        //UserDefaults.standard.set(app.videoProfile.rawValue,      forKey: "EnterVideoProfile")
         
         buttonEnterRoom.isEnabled = false
         buttonExitApp.isEnabled = false
@@ -210,7 +249,7 @@ class LoginViewController: NSViewController {
     }
     
     @IBAction func exitApplication(_ sender: Any) {
-        NSApplication.shared.terminate(self)
+        NSApp.terminate(self)
         // exit(0)
     }
     
@@ -224,6 +263,27 @@ extension LoginViewController: NSTextFieldDelegate {
         let textField = obj.object as! NSTextField
         if textField.isEqual(textFieldSessionID) {
             textFieldRtmpUrl.stringValue = "rtmp://push.3ttech.cn/sdk/\(textFieldSessionID.stringValue)"
+        }
+    }
+}
+
+extension LoginViewController: NSComboBoxDelegate {
+    func comboBoxSelectionDidChange(_ notification: Notification) {
+        let comboBox = notification.object as! NSComboBox
+        if comboBox.isEqual(comboBoxCamera) {
+            refreshVideoProfiles(videoCaptureDevice: videoCaptureDevices[comboBoxCamera.indexOfSelectedItem])
+        } else if comboBox.isEqual(comboBoxVideoProfile) {
+            switch comboBoxVideoProfile.indexOfSelectedItem {
+            case 1: // _VideoProfile_480P
+                textFieldFrameRate.stringValue = "15"
+                textFieldBitRate.stringValue = "600"
+            case 2: // _VideoProfile_720P
+                textFieldFrameRate.stringValue = "15"
+                textFieldBitRate.stringValue = "1130"
+            default: // _VideoProfile_360P
+                textFieldFrameRate.stringValue = "15"
+                textFieldBitRate.stringValue = "400"
+            }
         }
     }
 }
@@ -278,5 +338,9 @@ extension LoginViewController: TTTRtcEngineDelegate {
         //liveRoomWindowController.window?.makeKeyAndOrderFront(nil)
         app.mainWindowController?.close()
         app.mainWindowController = nil
+    }
+    
+    func rtcEngine(_ engine: TTTRtcEngineKit!, didAudioRouteChanged routing: TTTRtcAudioOutputRouting) {
+        fillAudioPlayoutDevices()
     }
 }

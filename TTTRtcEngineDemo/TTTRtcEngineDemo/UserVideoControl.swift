@@ -20,7 +20,8 @@ struct UserVideoControlPosition {
                 return 0
             }
             else {
-                return Int((1 - y) / height)
+                let r = round((1 - y) / height)
+                return Int(r)
             }
         }
         else {
@@ -51,6 +52,7 @@ struct UserVideoControlPosition {
 class UserVideoControl: NSControl {
     weak var user: TTTUser?
     weak var container: UserVideoContainer!
+    var deviceID = ""
     @IBOutlet var contentView: NSView!
     @IBOutlet weak var imageView: NSImageView!
     @IBOutlet weak var stackViewUser: NSStackView!
@@ -150,9 +152,11 @@ class UserVideoControl: NSControl {
     
     func reset() -> Void {
         user = nil
+        deviceID = ""
 //        mixedByHost = false
         imageView.isHidden = true
-        imageView.image = nil
+        imageView.image = NSImage(named: "black")
+        imageView.imageScaling = .scaleAxesIndependently
         
 //        showBorders(false)
 //        speakButton.isHidden = true
@@ -176,8 +180,9 @@ class UserVideoControl: NSControl {
         stackViewAudioLevel.isHidden = true
     }
 
-    func initWith(user: TTTUser, viewRenderMode:TTTRtcRenderMode) -> Void {
+    func initWith(user: TTTUser, deviceID: String, viewRenderMode:TTTRtcRenderMode) -> Void {
         self.user = user
+        self.deviceID = deviceID
         
         stackViewUser.isHidden = false
         viewMediaStats.isHidden = false
@@ -186,6 +191,7 @@ class UserVideoControl: NSControl {
         
         let videoCanvas = TTTRtcVideoCanvas()
         videoCanvas.uid = user.userID
+        videoCanvas.deviceId = deviceID
         videoCanvas.view = imageView
         videoCanvas.renderMode = viewRenderMode
 
@@ -195,6 +201,7 @@ class UserVideoControl: NSControl {
             labelUserRole.stringValue = "副播:"
         }
         labelUserID.stringValue = "\(user.userID)"
+        labelUserID.toolTip = deviceID
         
         if user.isMe {
             contentView.alphaValue = 1.0
@@ -243,11 +250,24 @@ class UserVideoControl: NSControl {
                 app.rtcEngine.setupLocalVideo(nil)
             }
             else {
-                app.rtcEngine.muteRemoteVideoStream(user!.userID, mute: true)
+                app.rtcEngine.muteRemoteVideoStream(user!.userID, mute: true, deviceId: deviceID)
                 app.rtcEngine.setupRemoteVideo(nil)
             }
             
             reset()
+        }
+    }
+    
+    func enableVideo(_ enabled: Bool) -> Void {
+        if user == nil || user!.isMe {
+            return
+        }
+        
+        if enabled {
+            //imageView.image = nil
+        } else {
+            imageView.image = NSImage(named: "black")
+            imageView.imageScaling = .scaleAxesIndependently
         }
     }
 
@@ -277,12 +297,12 @@ class UserVideoControl: NSControl {
     
     @IBAction func muteRemoteVideoStream(_ sender: NSButton) {
         if sender.tag == 0 {
-            app.rtcEngine.muteRemoteVideoStream(user!.userID, mute: true)
+            app.rtcEngine.muteRemoteVideoStream(user!.userID, mute: true, deviceId: deviceID)
             sender.tag = 1
             sender.image = NSImage(named: "video_close")
             sender.toolTip = "点击看用户视频"
         } else {
-            app.rtcEngine.muteRemoteVideoStream(user!.userID, mute: false)
+            app.rtcEngine.muteRemoteVideoStream(user!.userID, mute: false, deviceId: deviceID)
             sender.tag = 0
             sender.image = NSImage(named: "video")
             sender.toolTip = "点击不看用户视频"

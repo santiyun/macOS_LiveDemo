@@ -16,6 +16,7 @@ class Application: NSObject {
     
     var rtcEngine: TTTRtcEngineKit!
     var channelProfile = TTTRtcChannelProfile.channelProfile_LiveBroadcasting
+    var videoProfile = TTTRtcVideoProfile._VideoProfile_480P
     var videoCompositingLayout: TTTRtcVideoCompositingLayout?
     lazy var userArray = [TTTUser]()
     weak var userMe: TTTUser?
